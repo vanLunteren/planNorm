@@ -1,4 +1,50 @@
-test_h0 <- function (test, T, n1, n2, alpha, delta){
+#' @title 
+#' Test a test statistic to see if the null hypothesis can be rejected.
+#' 
+#' @description 
+#' This is an important secondary function. 
+#' It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic. 
+#' Three cases of hypotheses can be considered: test for superiority, test for non-inferiority, test for difference.
+#' 
+#' @usage 
+#' test_h0(test = 1, T, n1, n2, alpha = 0.05, delta = 0)
+#' 
+#' @param test
+#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
+#' or two-sided (Test for difference) (test = 2).
+#' If not specified, the one-Sided Test (Superiority / Non-Inferiority Test) is used.
+#' 
+#' @param T
+#' Number. Value of the calculated test statistic. 
+#' 
+#' @param n1
+#' Number. sample size of the first sample.
+#' 
+#' @param n2
+#' Number. sample size of the second sample.
+#' 
+#' @param alpha
+#' Number. Desired alpha-level of the test.
+#' If not specified, alpha is set to 0.05.
+#' 
+#' @param delta
+#' Number. Difference of the expectations of the two samples.
+#' If not specified, delta is set do 0.
+#' 
+#' @details 
+#' The aim of this function is to simplify the application of test decisions in hypothesis tests.
+#' 
+#' @return 
+#' The value 0 or 1 will be returned. 
+#' 0 means the null hypothesis can not be rejected to the level alpha.
+#' 1 means the null hypothesis is rejected to the level alpha. 
+#' 
+#' @author 
+#' Csilla van Lunteren
+#' 
+#' @export
+
+test_h0 <- function (test = 1, T, n1, n2, alpha = 0.05, delta = 0){
   
   if (test == 1){
     if (n1 + n2 <= 2){ 

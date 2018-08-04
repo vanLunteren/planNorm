@@ -1,30 +1,33 @@
-fix_sample_pow <- function (sd = seq(4, 42, 1.5), delta = 0, alpha = 0.05, beta = 0.2, Delta = 4,
-                            simu = 10000, test = 1, nbound = 300, nmin = 65){
+fix_sample_pow <- function (sd_ber, delta = 0, Delta = 4, sd, test = 1, alpha = 0.05, beta = 0.2, 
+                            simu = 10000){
+  
   set.seed(12021994)
   if (delta != 0 & test == 2){
-    stop("When choosing a two-sided hypothesis test (test for differences), delta = 0 must be selected." )
+    stop("When choosing a two-sided hypothesis test (test for differences), delta = 0 must be selected.")
   }
   
-  lapply(sd, sig <- function (sd){
+  if (test == 1){
+    N0 <- ceiling(4 * (qnorm(1 - alpha) + qnorm(1 - beta))^2 * sd^2 / (Delta - delta)^2)
+  } else {
+    N0 <- ceiling(4 * (qnorm(1 - alpha / 2) + qnorm(1 - beta))^2 * sd^2 / Delta^2)
+  }
+  
+  mapply(sig <- function (sd_ber){
     if (test == 1){
-      N0 <- ceiling(4 * (qnorm(1 - alpha) + qnorm(1 - beta))^2 * sd^2 / (Delta - delta)^2)
+      N <- ceiling(4 * (qnorm(1 - alpha) + qnorm(1 - beta))^2 * sd_ber^2 / (Delta - delta)^2)
     } else {
-      N0 <- ceiling(4 * (qnorm(1 - alpha / 2) + qnorm(1 - beta))^2 * sd^2 / Delta^2)
+      N <- ceiling(4 * (qnorm(1 - alpha / 2) + qnorm(1 - beta))^2 * sd_ber^2 / Delta^2)
     }
-    N0 <- max(N0, nmin)
-    if (is.numeric(nbound)){
-      N0 <- min(N0, nbound)
-    }
+  
+    abg <- replicate(simu, fix_calc(N0, sd_ber, delta, Delta, test, alpha, beta))
     
-    abg <- replicate(simu, fix_calc(N0, delta, sd, alpha, beta, Delta, test))
-    
-    return (c(N0, mean(abg)))
-  })
+    return (c(N, mean(abg)))
+  }, sd_ber)
 }
 
-sim_calc <- function(N0 = 65, delta = 0, sd = 4, alpha = 0.05, beta = 0.2, Delta = 4, test = 1){
-  X <- rnorm(n = N0 / 2, mean = Delta, sd = sd)
-  Y <- rnorm(n = N0 / 2, mean = 0, sd = sd)
+fix_calc <- function(N0 = 65, sd_ber, delta = 0, Delta = 4, test = 1, alpha = 0.05, beta = 0.2){
+  X <- rnorm(n = N0 / 2, mean = Delta, sd = sd_ber)
+  Y <- rnorm(n = N0 / 2, mean = 0, sd = sd_ber)
   
   S_gepoolt <- sqrt(((length(X) - 1) * var(X) + (length(Y) - 1) * var(Y) )/ (length(X) + length(Y) - 2))
   if (length(X) == 1 & length(Y) == 1){
