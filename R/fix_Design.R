@@ -84,8 +84,6 @@ fix_D <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 
   ##Power
   plot(sd_ber, N_pow[2, ], c(sd_min, sd_max), ylim = c(0, 1), type = "l", 
        main = "Power \n standard deviation", xlab = "standard deviation", ylab = "Power")
-  for (i in 1:length(sd_ber)){
-    points(sd_ber[i], N_pow[[i]][2])}
   abline(h = 0.8, lty = 2, col = "grey")
   abline(h = 0.2, lty = 2, col = "grey")
 }

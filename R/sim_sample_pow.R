@@ -23,7 +23,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta = 4, sd, test = 1,  alpha =
                         Delta = Delta, test = test, alpha = alpha, beta = beta, adj = adj, 
                         regel = regel, nbound = nbound))
       
-      return (c(mean(calc[1, ]), mean(calc[2, ])))
+      return (c(quantile(calc[1, ],c(0,0.25,0.5,0.75,1)), mean(calc[2, ])))
     }, prop)
   })
 }
