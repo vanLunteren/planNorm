@@ -12,7 +12,11 @@
 #' @param test
 #' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
 #' or two-sided (Test for difference) (test = 2).
-#' If not specified, the one-Sided Test (Superiority / Non-Inferiority Test) is used.
+#' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
+#'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
+#' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
+#' Attention: Choice of delta. (see delta)
+#' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 
 #' @param T
 #' Number. Value of the calculated test statistic. 
@@ -28,8 +32,12 @@
 #' If not specified, alpha is set to 0.05.
 #' 
 #' @param delta
-#' Number. Difference of the expectations of the two samples.
-#' If not specified, delta is set do 0.
+#' Number. Expectation difference of two samples.
+#' If you select a Test for superiority/ difference then select 'delta = 0'.
+#' Only if you select a Test for non-inferiority you can select 'delta != 0'.
+#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+#' be applied.
+#' If not specified, delta is set to 0.
 #' 
 #' @details 
 #' The aim of this function is to simplify the application of test decisions in hypothesis tests.

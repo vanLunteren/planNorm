@@ -9,11 +9,12 @@
 #' fix_D(delta = 0, Delta, alpha = 0.05, beta = 0.2, simu = 10000, test = 1, nbound = 500, nmin = 10)
 #' 
 #' @param delta
-#' Number. Difference of the expectations of the two samples.
+#' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
 #' Only if you select a Test for non-inferiority you can select 'delta != 0'.
-#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically be applied.
-#' If not specified, delta is set do 0.
+#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+#' be applied.
+#' If not specified, delta is set to 0.
 #' 
 #' @param Delta
 #' Number. Relevant difference of expected values in the alternative hypothesis.
@@ -33,6 +34,9 @@
 #' @param test
 #' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
 #' or two-sided (Test for difference) (test = 2).
+#' One-sided: Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
+#'            Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
+#' Tweo-sided: Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
 #' Attention: Choice of delta. (see delta)
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 

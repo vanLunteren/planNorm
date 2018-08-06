@@ -1,4 +1,51 @@
-fix_sample_pow <- function (sd_ber, delta = 0, Delta = 4, sd, test = 1, alpha = 0.05, beta = 0.2, 
+#' @title 
+#' @description 
+#' @usage 
+#' fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, simu = 10000)
+#' @param sd_ber
+#' 
+#' @param delta
+#' Number. Expectation difference of two samples.
+#' If you select a Test for superiority/ difference then select 'delta = 0'.
+#' Only if you select a Test for non-inferiority you can select 'delta != 0'.
+#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+#' be applied.
+#' If not specified, delta is set to 0.
+#' 
+#' @param Delta
+#' Number. Relevant difference of expected values in the alternative hypothesis.
+#' 
+#' @param sd
+#' 
+#' @param test
+#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
+#' or two-sided (Test for difference) (test = 2).
+#' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
+#'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
+#' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
+#' Attention: Choice of delta. (see delta)
+#' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
+#' 
+#' @param alpha
+#' Number. Desired alpha-level of the test.
+#' If not specified, alpha is set to 0.05.
+#' 
+#' @param beta
+#' Number. Acceptable beta error of the test.
+#' If not specified, beta is set to 0.2.
+#' 
+#' @param simu
+#' Number. How many simulations should be performed?
+#' If not specified, simu is set to 10000.
+#' 
+#' @details 
+#' @return 
+#' 
+#' @author
+#' Csilla van Lunteren 
+#' @export
+#' 
+fix_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
                             simu = 10000){
   
   set.seed(12021994)
@@ -25,7 +72,7 @@ fix_sample_pow <- function (sd_ber, delta = 0, Delta = 4, sd, test = 1, alpha = 
   }, sd_ber)
 }
 
-fix_calc <- function(N0 = 65, sd_ber, delta = 0, Delta = 4, test = 1, alpha = 0.05, beta = 0.2){
+fix_calc <- function(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2){
   X <- rnorm(n = N0 / 2, mean = Delta, sd = sd_ber)
   Y <- rnorm(n = N0 / 2, mean = 0, sd = sd_ber)
   
