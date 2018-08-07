@@ -3,7 +3,7 @@
 #' @usage 
 #' fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, simu = 10000)
 #' @param sd_ber
-#' 
+#' Vector of numbers. Interval of an area for the actual standard deviation in the data.
 #' @param delta
 #' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
@@ -16,13 +16,15 @@
 #' Number. Relevant difference of expected values in the alternative hypothesis.
 #' 
 #' @param sd
+#' Number. Assumed standard deviation of the data. 
+#' Used to calculate the originally planned sample size.
 #' 
 #' @param test
-#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
-#' or two-sided (Test for difference) (test = 2).
+#' Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)
+#' or two-sided (Test for difference).
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
-#' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
+#' Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
 #' Attention: Choice of delta. (see delta)
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 

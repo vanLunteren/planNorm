@@ -1,8 +1,15 @@
 #' @title 
 #' @description 
 #' @usage 
-#' sample_pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
+#' sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
 #'            adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000)
+#'            
+#' @param sd_ber
+#' Sequence of numbers. Interval of the actual standard deviation in the data. 
+#' With regard to this interval, the sample size and the power are displayed. 
+#' If no interval with more than two numbers but an upper limit is defined (see nbound), 
+#' a reasonable range is calculated automatically.
+#' 
 #' @param delta
 #' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
@@ -15,10 +22,12 @@
 #' Number. Relevant difference of expected values in the alternative hypothesis.
 #' 
 #' @param sd
+#' Number. Assumed standard deviation of the data. 
+#' Used to calculate the originally planned sample size.
 #' 
 #' @param test 
-#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
-#' or two-sided (Test for difference) (test = 2).
+#' Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)
+#' or two-sided (Test for difference).
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
 #' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
@@ -34,17 +43,26 @@
 #' If not specified, beta is set to 0.2.
 #' 
 #' @param prop
-#' 
+#' Number or vector of numbers. 
+#' Timing of the internal pilot study depending on the originally planned sample size.
+#' If a vector is passed, all timings within a plot are displayed.
+#'
 #' @param adj
+#' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #' 
 #' @param regel
+#' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #' 
 #' @param nbound
 #' Number. Upper limit of the sample size.
-#' Attention: only if you choose nbound and nmin can a suitable standard deviation range for the plots be calculated automatically. If no nbound and / or nmin are defined then a standard deviation range must be chosen.
-#' simu = 10000, test = 1, nbound = 500, nmin = 10)
+#' Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
+#' be calculated automatically. If no nbound are defined then a standard deviation range must be chosen (see sd_ber).
 #' 
 #' @param fix_sim
+#' Which design should be applied and presented? 
+#' "fixed": Design with fixed sample size, 
+#' "sim": Design with internal pilot study,
+#' c("fix", "sim"): both design
 #' 
 #' @param simu
 #' Number. How many simulations should be performed?
@@ -57,7 +75,7 @@
 #' Csilla van Lunteren 
 #' @export
 #' 
-sample_pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
+sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
                          adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000){
 
   if (test == 1){
@@ -81,7 +99,7 @@ sample_pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2
                   ", N0 = ", N0, ",\ntest = ", test_n, ", alpha = ", alpha, ", beta = ", beta)
   }
   
-  if (!(is.numeric(sd_ber))){
+  if (length(sd_ber) <= 2){
     sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (qnorm(1 - alpha) + qnorm(0.95)) * (Delta - delta)) 
     sd_max <- (1 / 2 * sqrt(nbound) * 1 / (qnorm(1 - alpha) + qnorm(0.18)) * (Delta - delta)) 
     sd_ber <- seq(sd_min, sd_max, (sd_max - sd_min) / 25)

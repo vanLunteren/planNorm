@@ -12,13 +12,15 @@
 #' If not specified, delta is set to 0.
 #' 
 #' @param Delta
-#' Number. Relevant difference of expected values in the alternative hypothesis.
+#' Number/ Vector of numbers. Relevant difference of expected values in the alternative hypothesis.
 #' 
 #' @param sd
+#' Number. Assumed standard deviation of the data. 
+#' Used to calculate the originally planned number of cases.
 #' 
 #' @param test
-#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test) (test = 1)
-#' or two-sided (Test for difference) (test = 2).
+#' Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)
+#' or two-sided (Test for difference).
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
 #' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
@@ -34,15 +36,20 @@
 #' If not specified, beta is set to 0.2.
 #' 
 #' @param prop
+#' Number/ sequence of numbers.
+#' Timing of the internal pilot study depending on the originally planned sample size.
 #' 
 #' @param adj
+#' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #' 
 #' @param regel
+#' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #' 
 #' @param nbound
 #' Number. Upper limit of the sample size.
-#' Attention: only if you choose nbound and nmin can a suitable standard deviation range for the plots be calculated automatically. If no nbound and / or nmin are defined then a standard deviation range must be chosen.
-#' simu = 10000, test = 1, nbound = 500, nmin = 10)
+#' Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
+#' be calculated automatically. 
+#' If no nbound are defined then a standard deviation range must be chosen (see sd_ber).
 #' 
 #' @param simu
 #' Number. How many simulations should be performed?
