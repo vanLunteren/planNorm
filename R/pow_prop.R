@@ -1,8 +1,15 @@
 #' @title 
+#' Creates a plot for the power based on the timing of the internal pilot study.
+#' 
 #' @description 
+#' That is one of the main functions. 
+#' It draws a plot of power based on the timing of the internal pilot study. 
+#' If desired, it may represent several actual expected value differences for comparison.
+#' 
 #' @usage 
 #' pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
 #'          adj = F, regel = F, nbound = 500, simu = 10000)
+#' 
 #' @param delta
 #' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
@@ -24,7 +31,7 @@
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
 #' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-#' Attention: Choice of delta. (see delta)
+#' Attention: Choice of delta. (see \code{delta})
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 
 #' @param alpha
@@ -50,17 +57,25 @@
 #' Number. Upper limit of the sample size.
 #' Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
 #' be calculated automatically. 
-#' If no nbound are defined then a standard deviation range must be chosen (see sd_ber).
+#' If no nbound are defined then a standard deviation range must be chosen (see \code{sd_ber}).
 #' 
 #' @param simu
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #' 
-#' @details 
-#' @return 
+#' @return
+#' It returns a plot. 
 #' 
 #' @author
-#' Csilla van Lunteren 
+#' Csilla van Lunteren
+#' 
+#' @seealso
+#' \code{\link{sim_pow}}\cr
+#' \link{ggplot2}\cr
+#' \link{gridExtra}
+#' 
+#' @import ggplot2
+#'  
 #' @export
 #'
 pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
@@ -80,35 +95,35 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
                   "\ntest = ", test_n, ", alpha = ", alpha, ", beta = ", beta, 
                   ", nbound = ", nbound )
 
-  powplot <- ggplot()
+  powplot <- ggplot2::ggplot()
   
   for (j in 1:length(Delta)){
     pow <- pow_prop[[j]]
     pow_dat <- data.frame(pow = pow, prop = prop_area)
     powplot <- powplot +
-      geom_line(data = pow_dat, aes( x = prop, y = pow), col = j, size = 1)
+      ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow), col = j, size = 1)
   }
   
   powplot <- powplot + 
-    coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]), 
+    ggplot2::coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]), 
                     ylim = c(min(pow_prop[[1]]), max(pow_prop[[length(Delta)]])))
 
   point_leg <- data.frame(x = rep(-1, 2 * length(Delta)), y = rep(-1, 2 * length(Delta)),
                             prop = 1:length(Delta))
     
   powplot <- powplot +
-    geom_line(data = point_leg, aes(x = x, y = y, color = factor(prop))) +
-    labs(color = "") +
-    scale_color_manual(labels = c(paste("Delta =", Delta)), 
+    ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+    ggplot2::labs(color = "") +
+    ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)), 
                        values = c(1:length(Delta))) +
-    theme(legend.key = element_rect(fill = "white"))
+    ggplot2::theme(legend.key = element_rect(fill = "white"))
   
   powplot +
-    geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-    scale_y_continuous(name = "Power") +
-    scale_x_continuous(name = "Timing (n1/N)") +
-    ggtitle("Power") +
-    theme(axis.line.x = element_line(size = 0.5, colour = "black"),
+    ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
+    ggplot2::scale_y_continuous(name = "Power") +
+    ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
+    ggplot2::ggtitle("Power") +
+    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
           axis.line.y = element_line(size = 0.5, colour = "black"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),

@@ -1,5 +1,13 @@
 #' @title 
+#' Creates a plot for the sample size and the power based on the standard deviation.
+#' 
 #' @description 
+#' That is one of the main functions. 
+#' It draws a plot of the sample size and the power based on the standard deviation.
+#' The sample size and power can be calculated for the design with a fixed sample size and / or 
+#' with an internal pilot study. 
+#' If desired, it may represent several timings for the internal pilot studies for comparison.
+#' 
 #' @usage 
 #' sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
 #'            adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000)
@@ -68,11 +76,21 @@
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #' 
-#' @details 
 #' @return 
+#' It returns a plot. 
 #' 
 #' @author
 #' Csilla van Lunteren 
+#' 
+#' @seealso
+#' \code{\link{fix_sample_pow}}\cr
+#' \code{\link{sim_sample_pow}}\cr
+#' \link{ggplot2}\cr
+#' \link{gridExtra}
+#' 
+#' @import ggplot2
+#' @import grindExtra
+#' @import grid
 #' @export
 #' 
 sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
@@ -118,20 +136,16 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
                               nbound = nbound, simu = simu)
   }
   
-  library("ggplot2")
-  library("gridExtra")
-  library("grid")
-  
-  pplot <- ggplot()
+  pplot <- ggplot2::ggplot()
   
   if ("fix" %in% fix_sim){
     N_fix <- data.frame(sd = sd_ber, N = N_pow_f[1, ])
     if (!("sim" %in% fix_sim)){
       pplot <- pplot + 
-        geom_line(data = N_fix, aes(x = sd, y = N), col = "black")
+        ggplot2::geom_line(data = N_fix, ggplot2::aes(x = sd, y = N), col = "black")
     } else {
       pplot <- pplot + 
-        geom_line(data = N_fix, aes(x = sd, y = N), col = "darkgrey")
+        ggplot2::geom_line(data = N_fix, ggplot2::aes(x = sd, y = N), col = "darkgrey")
     }
   }
   
@@ -145,58 +159,58 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       }
       N_sim <- data.frame(N = x, sd = y)
       pplot <- pplot +  
-        geom_boxplot(data = N_sim, aes(x = sd, y = N, group = sd), outlier.shape = NA, col = j, 
-                     fill = j, alpha = 0.2)
+        ggplot2::geom_boxplot(data = N_sim, ggplot2::aes(x = sd, y = N, group = sd), outlier.shape = NA, 
+                              col = j, fill = j, alpha = 0.2)
     }
     pplot <- pplot + 
-      coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]), ylim = c(0, nbound + nbound / 12))
+      ggplot2::coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]), ylim = c(0, nbound + nbound / 12))
   } else if ("fix" %in% fix_sim & !("sim" %in% fix_sim)){
     pplot <- pplot + 
-      coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]))
+      ggplot2::coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]))
   }
   
   if ("sim" %in% fix_sim){
     point_leg <- data.frame(x = rep(-1, 2 * (length(prop) + 1)), y = rep(-1, 2 * (length(prop) + 1)),
                             prop = rep(1:(length(prop) + 1), 2))
     pplot <- pplot +
-      geom_line(data = point_leg, aes(x = x, y = y, color = factor(prop))) +
-      labs(color = "") +
-      scale_color_manual(labels = c("fix", paste("prop =",prop)), 
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::labs(color = "") +
+      ggplot2::scale_color_manual(labels = c("fix", paste("prop =",prop)), 
                          values = c("darkgray", 1:length(prop))) +
-      theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = element_rect(fill = "white"))
   } else {
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = c(1, 1))
     
     pplot <- pplot +
-      geom_line(data = point_leg, aes(x = x, y = y, color = factor(prop))) +
-      labs(color = "") +
-      scale_color_manual(labels = "fix", values = "black") +
-      theme(legend.key = element_rect(fill = "white"))
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::labs(color = "") +
+      ggplot2::scale_color_manual(labels = "fix", values = "black") +
+      ggplot2::theme(legend.key = element_rect(fill = "white"))
   }
 
   pplot <- pplot +
-    geom_hline(yintercept = N0, linetype = 2, col = "gray") +
-    scale_y_continuous(name = "Sample Size") +
-    scale_x_continuous(name = "Standard Deviation", 
+    ggplot2::geom_hline(yintercept = N0, linetype = 2, col = "gray") +
+    ggplot2::scale_y_continuous(name = "Sample Size") +
+    ggplot2::scale_x_continuous(name = "Standard Deviation", 
                        breaks = seq(round(min(sd_ber)), round(max(sd_ber)), round((max(sd_ber) - min(sd_ber)) / 10))) +
-    ggtitle("Sample Size") +
-    theme(axis.line.x = element_line(size = 0.5, colour = "black"),
+    ggplot2::ggtitle("Sample Size") +
+    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
           axis.line.y = element_line(size = 0.5, colour = "black"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.background = element_blank())
   
-  powplot <- ggplot()
+  powplot <- ggplot2::ggplot()
   
   if ("fix" %in% fix_sim){
     pow_fix <- data.frame(sd = sd_ber, N = N_pow_f[2, ])
     
     if (!("sim" %in% fix_sim)){
       powplot <- powplot + 
-        geom_line(data = pow_fix, aes(x = sd, y = N), col = "black")
+        ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = N), col = "black")
     } else {
       powplot <- powplot + 
-        geom_line(data = pow_fix, aes(x = sd, y = N), col = "darkgrey")
+        ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = N), col = "darkgrey")
     }
   }
   
@@ -208,54 +222,54 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       }
       pow_sim <- data.frame(N = x, sd = sd_ber)
       powplot <- powplot + 
-        geom_line(data = pow_sim, aes( x = sd, y = N ), col = j, size = 1)
+        ggplot2::geom_line(data = pow_sim, ggplot2::aes( x = sd, y = N ), col = j, size = 1)
     }
   }
   
   powplot <- powplot + 
-    coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]), ylim = c(0, 1))
+    ggplot2::coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]), ylim = c(0, 1))
   
   if ("sim" %in% fix_sim){
     point_leg <- data.frame(x = rep(-1, 2 * (length(prop) + 1)), y = rep(-1, 2 * (length(prop) + 1)),
                             prop = 1:(length(prop) + 1))
     
     powplot <- powplot +
-      geom_line(data = point_leg, aes(x = x, y = y, color = factor(prop))) +
-      labs(color = "") +
-      scale_color_manual(labels = c("fix", paste("prop =", prop)), 
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::labs(color = "") +
+      ggplot2::scale_color_manual(labels = c("fix", paste("prop =", prop)), 
                          values = c("darkgray", 1:length(prop))) +
-      theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = element_rect(fill = "white"))
   } else {
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = 1)
     
     powplot <- powplot +
-      geom_line(data = point_leg, aes(x = x, y = y, color = factor(prop))) +
-      labs(color = "") +
-      scale_color_manual(labels = "fix", values = "black") +
-      theme(legend.key = element_rect(fill = "white"))
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::labs(color = "") +
+      ggplot2::scale_color_manual(labels = "fix", values = "black") +
+      ggplot2::theme(legend.key = element_rect(fill = "white"))
   }
   
   powplot <- powplot +
-    geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-    geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
-    scale_y_continuous(name = "Power", breaks = seq(0, 1, 0.2)) +
-    scale_x_continuous(name = "Standard Deviation", 
+    ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
+    ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
+    ggplot2::scale_y_continuous(name = "Power", breaks = seq(0, 1, 0.2)) +
+    ggplot2::scale_x_continuous(name = "Standard Deviation", 
                        breaks = seq(round(min(sd_ber)), round(max(sd_ber)), 
                                     round((max(sd_ber) - min(sd_ber)) / 10))) +
-    ggtitle("Power") +
-    theme(axis.line.x = element_line(size = 0.5, colour = "black"),
+    ggplot2::ggtitle("Power") +
+    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
           axis.line.y = element_line(size = 0.5, colour = "black"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.background = element_blank())
   
-  grid.arrange(
+  gridExtra::grid.arrange(
     pplot,
     powplot,
     nrow = 1,
     ncol = 2,
     top = "Sample Size and Power",
-    bottom = textGrob(text, gp = gpar(fontface = 1, fontsize = 9), x = 0, hjust = -0.1
+    bottom = grid::textGrob(text, gp = grid::gpar(fontface = 1, fontsize = 9), x = 0, hjust = -0.1
     )
   )
   

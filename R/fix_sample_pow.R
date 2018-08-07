@@ -1,9 +1,18 @@
 #' @title 
+#' Simulation of the sample size and the power.
+#' 
 #' @description 
+#' This is an auxiliary function. 
+#' It calculates the sample size and the simulated power of a fixed-sample design.
+#' The originally planned sample size is calculated on the basis of an assumed standard deviation. 
+#' A distinction is made between one-sided and two-sided tests.
+#' 
 #' @usage 
 #' fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, simu = 10000)
+#' 
 #' @param sd_ber
 #' Vector of numbers. Interval of an area for the actual standard deviation in the data.
+#' 
 #' @param delta
 #' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
@@ -25,7 +34,7 @@
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
 #' Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-#' Attention: Choice of delta. (see delta)
+#' Attention: Choice of delta. (see \code{delta})
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 
 #' @param alpha
@@ -40,8 +49,9 @@
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #' 
-#' @details 
 #' @return 
+#' This function only creates the sample size and Power values for multiple actual standard deviation values.
+#' The output is used in the function sample_pow to visualize the sample size and the power.
 #' 
 #' @author
 #' Csilla van Lunteren 

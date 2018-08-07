@@ -1,5 +1,13 @@
 #' @title 
+#' Simulation of the sample size and power.
+#' 
 #' @description 
+#' This is an auxiliary function. 
+#' It calculates the sample size and power of the design with an internal pilot study for different 
+#' standard deviations and for multiple timings of the internal pilot studies.
+#' The originally planned sample size is calculated on the basis of an assumed standard deviation. 
+#' A distinction is made between one-sided and two-sided tests.
+#' 
 #' @usage 
 #' sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2, 
 #'                prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000)
@@ -59,8 +67,10 @@
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #' 
-#' @details 
 #' @return 
+#' This function only creates the sample size and power values for multiple standard deviations.
+#' The output is used in the function \code{sample_pow} to visualize the sample size and power depending 
+#' on the timing of the internal pilot studies.
 #' 
 #' @author
 #' Csilla van Lunteren 

@@ -1,8 +1,17 @@
 #' @title 
+#' Simulation of the power.
+#' 
 #' @description 
+#' This is an auxiliary function. 
+#' It calculates the power of the design with an internal pilot study for different timings of the 
+#' pilot study and for multiple actual differences in expected differences.
+#' The originally planned sample size is calculated on the basis of an assumed standard deviation. 
+#' A distinction is made between one-sided and two-sided tests.
+#' 
 #' @usage 
 #' pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05), 
 #'     adj = F, regel = F, nbound = 500, simu = 10000)
+#' 
 #' @param delta
 #' Number. Expectation difference of two samples.
 #' If you select a Test for superiority/ difference then select 'delta = 0'.
@@ -24,7 +33,7 @@
 #' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
 #'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
 #' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-#' Attention: Choice of delta. (see delta)
+#' Attention: Choice of delta. (see \code{delta})
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #' 
 #' @param alpha
@@ -49,14 +58,16 @@
 #' Number. Upper limit of the sample size.
 #' Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
 #' be calculated automatically. 
-#' If no nbound are defined then a standard deviation range must be chosen (see sd_ber).
+#' If no nbound are defined then a standard deviation range must be chosen (see \code{sd_ber}).
 #' 
 #' @param simu
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #' 
-#' @details 
 #' @return 
+#' This function only creates the power values for multiple timings of the internal pilot studies.
+#' The output is used in the function \code{pow_prop} to visualize the power depending on the timing 
+#' for different true expected value differences.
 #' 
 #' @author
 #' Csilla van Lunteren 
@@ -64,8 +75,6 @@
 #'
 pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05), 
                      adj = F, regel = F, nbound = 500, simu = 10000){
-  
-
   
   set.seed(12021994)
   if (delta != 0 & test == 2){
