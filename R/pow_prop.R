@@ -70,7 +70,7 @@
 #' Csilla van Lunteren
 #' 
 #' @seealso
-#' \code{\link{sim_pow}}\cr
+#' \code{\link{pow}}\cr
 #' \link{ggplot2}\cr
 #' \link{gridExtra}
 #' 
@@ -82,7 +82,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
                      adj = F, regel = F, nbound = 500, simu = 10000){
   
   prop_area <- seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 )
-  pow_prop <- sim_pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
+  pow_prop <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
                       prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
  
   if (test == 1){
@@ -108,11 +108,13 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     ggplot2::coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]), 
                     ylim = c(min(pow_prop[[1]]), max(pow_prop[[length(Delta)]])))
 
-  point_leg <- data.frame(x = rep(-1, 2 * length(Delta)), y = rep(-1, 2 * length(Delta)),
-                            prop = 1:length(Delta))
+  p1 = rep(-1, 2 * length(Delta))
+  p2 = rep(-1, 2 * length(Delta))
+  
+  point_leg <- data.frame(p1 = p1, p2 = p2, prop = 1:length(Delta))
     
   powplot <- powplot +
-    ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+    ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2), col = factor(prop)) +
     ggplot2::labs(color = "") +
     ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)), 
                        values = c(1:length(Delta))) +

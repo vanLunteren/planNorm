@@ -50,6 +50,8 @@
 #' @author 
 #' Csilla van Lunteren
 #' 
+#' @import stats
+#' 
 #' @export
 
 test_h0 <- function (test = 1, T, n1, n2, alpha = 0.05, delta = 0){
@@ -64,7 +66,7 @@ test_h0 <- function (test = 1, T, n1, n2, alpha = 0.05, delta = 0){
         quantil <- 0
       }
     } else {
-      quantil <- qt(1 - alpha, n1 + n2 - 2)
+      quantil <- stats::qt(1 - alpha, n1 + n2 - 2)
     }
   } else {
     if (n1 + n2 <= 2){ 
@@ -76,7 +78,7 @@ test_h0 <- function (test = 1, T, n1, n2, alpha = 0.05, delta = 0){
         quantil <- 0
       }
     } else {
-      quantil <- qt(1 - alpha / 2, n1 + n2 - 2)
+      quantil <- stats::qt(1 - alpha / 2, n1 + n2 - 2)
     }
   }
   

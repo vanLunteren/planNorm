@@ -9,8 +9,9 @@
 #' If desired, it may represent several timings for the internal pilot studies for comparison.
 #' 
 #' @usage 
-#' sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
-#'            adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000)
+#' sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
+#'            prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500, 
+#'            fix_sim = c("fix", "sim"), simu = 10000)
 #'            
 #' @param sd_ber
 #' Sequence of numbers. Interval of the actual standard deviation in the data. 
@@ -89,17 +90,19 @@
 #' \link{gridExtra}
 #' 
 #' @import ggplot2
-#' @import grindExtra
+#' @import gridExtra
 #' @import grid
+#' @import stats
+#' 
 #' @export
 #' 
 sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7), 
                          adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000){
 
   if (test == 1){
-    N0 <- ceiling(4 * (qnorm(1 - alpha) + qnorm(1 - beta))^2 * sd^2 / (Delta - delta)^2)
+    N0 <- ceiling(4 * (stats::qnorm(1 - alpha) + stats::qnorm(1 - beta))^2 * sd^2 / (Delta - delta)^2)
   } else {
-    N0 <- ceiling(4 * (qnorm(1 - alpha / 2) + qnorm(1 - beta))^2 * sd^2 / Delta^2)
+    N0 <- ceiling(4 * (stats::qnorm(1 - alpha / 2) + stats::qnorm(1 - beta))^2 * sd^2 / Delta^2)
   }
   
   if (test == 1){
@@ -118,8 +121,8 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
   }
   
   if (length(sd_ber) <= 2){
-    sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (qnorm(1 - alpha) + qnorm(0.95)) * (Delta - delta)) 
-    sd_max <- (1 / 2 * sqrt(nbound) * 1 / (qnorm(1 - alpha) + qnorm(0.18)) * (Delta - delta)) 
+    sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.95)) * (Delta - delta)) 
+    sd_max <- (1 / 2 * sqrt(nbound) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.18)) * (Delta - delta)) 
     sd_ber <- seq(sd_min, sd_max, (sd_max - sd_min) / 25)
   } else if (length(sd_ber) == 2){
     sd_ber <- seq(min(sd_ber), max(sd_ber), (max(sd_ber) - min(sd_ber)) / 25)
@@ -151,13 +154,13 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
   
   if ("sim" %in% fix_sim){
     for (j in 1:length(prop)){
-      x <- c()
-      y <- c()
+      sd_ <- c()
+      N <- c()
       for (i in 1:length(sd_ber)){
-        x <- c(x, N_pow_s[[i]][1:5, j])
-        y <- c(y, rep(sd_ber[i], 5))
+        sd_ <- c(sd_, N_pow_s[[i]][1:5, j])
+        N <- c(N, rep(sd_ber[i], 5))
       }
-      N_sim <- data.frame(N = x, sd = y)
+      N_sim <- data.frame(N = N, sd = sd_)
       pplot <- pplot +  
         ggplot2::geom_boxplot(data = N_sim, ggplot2::aes(x = sd, y = N, group = sd), outlier.shape = NA, 
                               col = j, fill = j, alpha = 0.2)
@@ -170,8 +173,9 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
   }
   
   if ("sim" %in% fix_sim){
-    point_leg <- data.frame(x = rep(-1, 2 * (length(prop) + 1)), y = rep(-1, 2 * (length(prop) + 1)),
-                            prop = rep(1:(length(prop) + 1), 2))
+    x = rep(-1, 2 * (length(prop) + 1))
+    y = rep(-1, 2 * (length(prop) + 1))
+    point_leg <- data.frame(x = x, y = y, prop = rep(1:(length(prop) + 1), 2))
     pplot <- pplot +
       ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
       ggplot2::labs(color = "") +
@@ -216,11 +220,11 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
   
   if ("sim" %in% fix_sim){
     for (j in 1:length(prop)){
-      x <- c()
+      N <- c()
       for (i in 1:length(sd_ber)){
-        x <- c(x, N_pow_s[[i]][6, j])
+        N <- c(N, N_pow_s[[i]][6, j])
       }
-      pow_sim <- data.frame(N = x, sd = sd_ber)
+      pow_sim <- data.frame(N = N, sd = sd_ber)
       powplot <- powplot + 
         ggplot2::geom_line(data = pow_sim, ggplot2::aes( x = sd, y = N ), col = j, size = 1)
     }
@@ -234,7 +238,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
                             prop = 1:(length(prop) + 1))
     
     powplot <- powplot +
-      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y), col = factor(prop)) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = c("fix", paste("prop =", prop)), 
                          values = c("darkgray", 1:length(prop))) +
@@ -243,7 +247,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = 1)
     
     powplot <- powplot +
-      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y), col = factor(prop)) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = "fix", values = "black") +
       ggplot2::theme(legend.key = element_rect(fill = "white"))
