@@ -1,0 +1,18 @@
+Package: plan_norm
+Type: Package
+Title: R-tool for planning clinical studies with internal pilot study on normally distributed data.
+Version: 1.0
+Date: 2018-08-09
+Author: person("Csilla", "van Lunteren", role = c("aut", "cre"))
+Maintainer: Csilla van Lunteren <csillavanlunteren@gmx.de>
+  Description: R-tool for planning clinical studies with internal pilot study on normally distributed data. 
+Designs with a fixed sample size and designs with an internal pilot study can be considered
+Depends:
+  R  (>= 3.3.0)
+Imports:
+  ggplot2,
+  gridExtra
+License: GPL
+LazyLoad: yes
+RoxygenNote: 6.0.1
+Suggests: testthat
