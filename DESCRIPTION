@@ -15,7 +15,7 @@ Depends:
 Imports:
   digest,
   withr (>= 2.0.0),
-  Scales,
+  scales,
   gridExtra,
   stats,
   munsell
