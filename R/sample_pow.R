@@ -89,9 +89,23 @@
 #' \link{ggplot2}\cr
 #' \link{gridExtra}
 #' 
-#' @import ggplot2
-#' @import gridExtra
-#' @import grid
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_line
+#' @importFrom ggplot2 geom_boxplot
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 coord_cartesian
+#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 scale_color_manual
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 geom_hline
+#' @importFrom ggplot2 scale_x_continuous
+#' @importFrom ggplot2 scale_y_continuous
+#' @importFrom ggplot2 ggtitle
+#' @importFrom ggplot2 element_rect
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_blank
+#' @importFrom gridExtra grid.arrange
+#' @importFrom grid textGrob
 #' @import stats
 #' 
 #' @export
@@ -181,7 +195,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = c("fix", paste("prop =",prop)), 
                          values = c("darkgray", 1:length(prop))) +
-      ggplot2::theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
   } else {
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = c(1, 1))
     
@@ -189,7 +203,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = "fix", values = "black") +
-      ggplot2::theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
   }
 
   pplot <- pplot +
@@ -198,11 +212,11 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
     ggplot2::scale_x_continuous(name = "Standard Deviation", 
                        breaks = seq(round(min(sd_ber)), round(max(sd_ber)), round((max(sd_ber) - min(sd_ber)) / 10))) +
     ggplot2::ggtitle("Sample Size") +
-    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
-          axis.line.y = element_line(size = 0.5, colour = "black"),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.background = element_blank())
+    ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
+          axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+          panel.grid.major = ggplot2::element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
+          panel.background = ggplot2::element_blank())
   
   powplot <- ggplot2::ggplot()
   
@@ -242,7 +256,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = c("fix", paste("prop =", prop)), 
                          values = c("darkgray", 1:length(prop))) +
-      ggplot2::theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
   } else {
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = 1)
     
@@ -250,7 +264,7 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
       ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y), col = factor(prop)) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = "fix", values = "black") +
-      ggplot2::theme(legend.key = element_rect(fill = "white"))
+      ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
   }
   
   powplot <- powplot +
@@ -261,11 +275,11 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
                        breaks = seq(round(min(sd_ber)), round(max(sd_ber)), 
                                     round((max(sd_ber) - min(sd_ber)) / 10))) +
     ggplot2::ggtitle("Power") +
-    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
-          axis.line.y = element_line(size = 0.5, colour = "black"),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.background = element_blank())
+    ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
+          axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+          panel.grid.major = ggplot2::element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
+          panel.background = ggplot2::element_blank())
   
   gridExtra::grid.arrange(
     pplot,

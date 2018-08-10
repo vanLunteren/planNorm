@@ -60,8 +60,7 @@ If desired, it may represent several actual expected value differences for compa
 }
 \seealso{
 \code{\link{pow}}\cr
-\link{ggplot2}\cr
-\link{gridExtra}
+\link{ggplot2}
 }
 \author{
 Csilla van Lunteren

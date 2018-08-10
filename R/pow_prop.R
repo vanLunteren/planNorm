@@ -71,10 +71,22 @@
 #' 
 #' @seealso
 #' \code{\link{pow}}\cr
-#' \link{ggplot2}\cr
-#' \link{gridExtra}
+#' \link{ggplot2}
 #' 
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_line
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 coord_cartesian
+#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 scale_color_manual
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 geom_hline
+#' @importFrom ggplot2 scale_x_continuous
+#' @importFrom ggplot2 scale_y_continuous
+#' @importFrom ggplot2 ggtitle
+#' @importFrom ggplot2 element_blank
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_blank
 #'  
 #' @export
 #'
@@ -118,16 +130,16 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     ggplot2::labs(color = "") +
     ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)), 
                        values = c(1:length(Delta))) +
-    ggplot2::theme(legend.key = element_rect(fill = "white"))
+    ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
   
   powplot +
     ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
     ggplot2::scale_y_continuous(name = "Power") +
     ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
     ggplot2::ggtitle("Power") +
-    ggplot2::theme(axis.line.x = element_line(size = 0.5, colour = "black"),
-          axis.line.y = element_line(size = 0.5, colour = "black"),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.background = element_blank())
+    ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
+          axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+          panel.grid.major = ggplot2::element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
+          panel.background = ggplot2::element_blank())
 }
