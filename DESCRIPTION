@@ -10,32 +10,11 @@ Description: The package treats the sample size in dependence on the standard de
             timing of the internal pinlot study. Designs with a fixed sample size and 
             designs with an internal pilot study can be considered.
 Depends:
+  ggplot2 (>= 2.0.0),
   R  (>= 3.3.0)
 Imports:
-  magrittr,
-  munsell,
   gridExtra,
-  stats,
-  covr,
-  ggplot2movies,
-  hexbin,
-  Hmisc,
-  lattice,
-  mapproj,
-  maps,
-  maptools,
-  multcomp,
-  nlme,
-  testthat (>= 0.11.0),
-  vdiffr,
-  quantreg,
-  knitr,
-  rgeos,
-  rpart,
-  rmarkdown,
-  sf (>= 0.3-4),
-  svglite (>= 1.2.0.9001),
-  ggplot2
+  stats
 License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.0

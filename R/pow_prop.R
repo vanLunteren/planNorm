@@ -73,9 +73,6 @@
 #' \code{\link{pow}}\cr
 #' \link{ggplot2}
 #' 
-#' @import magrittr
-#' @import munsell
-#' @import dplyr
 #' @import ggplot2
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 geom_line
