@@ -14,7 +14,6 @@ Depends:
 Imports:
   magrittr,
   munsell,
-  dplyr,
   gridExtra,
   stats,
   covr,
