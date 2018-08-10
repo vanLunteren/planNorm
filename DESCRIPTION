@@ -15,7 +15,6 @@ Imports:
   magrittr,
   munsell,
   dplyr,
-  ggplot2,
   gridExtra,
   stats,
   covr,
@@ -36,7 +35,8 @@ Imports:
   rpart,
   rmarkdown,
   sf (>= 0.3-4),
-  svglite (>= 1.2.0.9001)
+  svglite (>= 1.2.0.9001),
+  ggplot2
 License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.0
