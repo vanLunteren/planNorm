@@ -16,8 +16,7 @@ Imports:
   gridExtra,
   stats
 Suggests:
-  knitr,
-  testthat
+  munsell
 License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.0
