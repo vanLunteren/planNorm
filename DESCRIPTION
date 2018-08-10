@@ -14,8 +14,7 @@ Depends:
   R  (>= 3.3.0)
 Imports:
   gridExtra,
-  stats
-Suggests:
+  stats,
   munsell
 License: GPL
 LazyLoad: yes
