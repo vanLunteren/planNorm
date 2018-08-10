@@ -14,7 +14,7 @@ Depends:
   R  (>= 3.3.0)
 Imports:
   digest,
-  withr (>= 2.0.0)
+  withr (>= 2.0.0),
   Scales,
   gridExtra,
   stats,
