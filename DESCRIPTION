@@ -10,7 +10,8 @@ Description: The package treats the sample size in dependence on the standard de
             timing of the internal pinlot study. Designs with a fixed sample size and 
             designs with an internal pilot study can be considered.
 Depends:
-  R  (>= 3.3.0)
+  R  (>= 3.3.0),
+  ggplot2
 Imports:
   ggplot2,
   gridExtra,
