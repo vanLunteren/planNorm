@@ -12,6 +12,9 @@ Description: The package treats the sample size in dependence on the standard de
 Depends:
   R  (>= 3.3.0)
 Imports:
+  magrittr,
+  munsell,
+  dplyr,
   ggplot2,
   gridExtra,
   stats
