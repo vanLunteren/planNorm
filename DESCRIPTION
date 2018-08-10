@@ -16,10 +16,9 @@ Imports:
   gridExtra,
   stats
 Suggests:
-  intergraph,
   knitr,
   testthat
 License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.0
-Suggests: testthat
+
