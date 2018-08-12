@@ -248,11 +248,12 @@ sample_pow <- function (sd_ber = F, delta = 0, Delta, sd, test = 1, alpha = 0.05
     ggplot2::coord_cartesian(xlim = c(sd_ber[1], sd_ber[length(sd_ber)]), ylim = c(0, 1))
 
   if ("sim" %in% fix_sim){
-    point_leg <- data.frame(x = rep(-1, 2 * (length(prop) + 1)), y = rep(-1, 2 * (length(prop) + 1)),
-                            prop = 1:(length(prop) + 1))
+    x = rep(-1, 2 * (length(prop) + 1))
+    y = rep(-2, 2 * (length(prop) + 1))
+    point_leg <- data.frame(x, y, prop = 1:(length(prop) + 1))
 
     powplot <- powplot +
-      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y), col = factor(prop)) +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, col = factor(prop))) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = c("fix", paste("prop =", prop)),
                          values = c("darkgray", 1:length(prop))) +
@@ -261,7 +262,7 @@ sample_pow <- function (sd_ber = F, delta = 0, Delta, sd, test = 1, alpha = 0.05
     point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = 1)
 
     powplot <- powplot +
-      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y), col = factor(prop)) +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, col = factor(prop))) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = "fix", values = "black") +
       ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
