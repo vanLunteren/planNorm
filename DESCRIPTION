@@ -11,11 +11,12 @@ Description: The package treats the sample size in dependence on the standard de
             designs with an internal pilot study can be considered.
 Depends:
   ggplot2 (>= 2.0.0),
+  digest,
+  scales,
   R  (>= 3.3.0)
 Imports:
   digest,
   withr (>= 2.0.0),
-  scales,
   gridExtra,
   stats,
   munsell
