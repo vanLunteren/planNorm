@@ -13,7 +13,6 @@ Depends:
   ggplot2 (>= 2.0.0),
   R  (>= 3.3.0)
 Imports:
-  scales,
   withr (>= 2.0.0),
   gridExtra,
   stats,
