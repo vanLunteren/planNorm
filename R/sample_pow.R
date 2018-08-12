@@ -110,7 +110,7 @@
 #'
 #' @export
 #'
-sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7),
+pow_prop <- function (sd_ber = F, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.5, 0.7),
                          adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"), simu = 10000){
 
   if (test == 1){
@@ -134,12 +134,12 @@ sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, be
                   ", N0 = ", N0, ",\ntest = ", test_n, ", alpha = ", alpha, ", beta = ", beta)
   }
 
-  if (length(sd_ber) <= 2){
+  if (is.numeric(sd_ber) & length(sd_ber) >= 2){
+    sd_ber <- seq(min(sd_ber), max(sd_ber), (max(sd_ber) - min(sd_ber)) / 25)
+  }else{
     sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.95)) * (Delta - delta))
     sd_max <- (1 / 2 * sqrt(nbound) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.18)) * (Delta - delta))
     sd_ber <- seq(sd_min, sd_max, (sd_max - sd_min) / 25)
-  } else if (length(sd_ber) == 2){
-    sd_ber <- seq(min(sd_ber), max(sd_ber), (max(sd_ber) - min(sd_ber)) / 25)
   }
 
   if ("fix" %in% fix_sim){
