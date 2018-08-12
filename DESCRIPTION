@@ -13,6 +13,11 @@ Depends:
   ggplot2 (>= 2.0.0),
   R  (>= 3.3.0)
 Imports:
+  scales,
+  lazyeval,
+  plyr,
+  rlang,
+  tibble,
   withr (>= 2.0.0),
   gridExtra,
   stats,
