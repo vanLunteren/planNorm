@@ -171,8 +171,8 @@ sample_pow <- function (sd_ber = F, delta = 0, Delta, sd, test = 1, alpha = 0.05
       sd_ <- c()
       N <- c()
       for (i in 1:length(sd_ber)){
-        sd_ <- c(sd_, N_pow_s[[i]][1:5, j])
-        N <- c(N, rep(sd_ber[i], 5))
+        sd_ <- c(sd_, rep(sd_ber[i], 5))
+        N <- c(N, N_pow_s[[i]][1:5, j])
       }
       N_sim <- data.frame(N = N, sd = sd_)
       pplot <- pplot +
