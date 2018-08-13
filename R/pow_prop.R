@@ -87,6 +87,17 @@
 #' @importFrom ggplot2 element_blank
 #' @importFrom ggplot2 element_line
 #' @importFrom ggplot2 element_blank
+#' @importFrom flextable regulartable
+#' @importFrom flextable set_header_labels
+#' @importFrom flextable merge_at
+#' @importFrom flextable align
+#' @importFrom flextable style
+#' @importFrom flextable border
+#' @importFrom flextable bold
+#' @importFrom flextable width
+#' @importFrom officer fp_text
+#' @importFrom officer fp_cell
+#' @importFrom officer fp_border
 #' @import ggplot2
 #' @export
 #'
