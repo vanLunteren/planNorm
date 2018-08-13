@@ -5,19 +5,19 @@
 \title{Creates a plot for the power based on the timing of the internal pilot study.}
 \usage{
 pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-         adj = F, regel = F, nbound = 500, simu = 10000)
+         adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")
 }
 \arguments{
 \item{delta}{Number. Expectation difference of two samples.
 If you select a Test for superiority/ difference then select 'delta = 0'.
 Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically
 be applied.
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.}
 
-\item{sd}{Number. Assumed standard deviation of the data. 
+\item{sd}{Number. Assumed standard deviation of the data.
 Used to calculate the originally planned number of cases.}
 
 \item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)
@@ -35,7 +35,7 @@ If not specified, alpha is set to 0.05.}
 If not specified, beta is set to 0.2.}
 
 \item{prop}{Vector of two Numbers. Timing of the internal pilot study depending on the originally planned sample size.
-Two numbers must be passed, the smallest and largest timing of the internal pilot study. 
+Two numbers must be passed, the smallest and largest timing of the internal pilot study.
 The plot is displayed for the interval of these two values.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
@@ -43,19 +43,22 @@ The plot is displayed for the interval of these two values.}
 \item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.
-Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
-be calculated automatically. 
+Attention: Only if you choose nbound can a suitable standard deviation range for the plots
+be calculated automatically.
 If no nbound are defined then a standard deviation range must be chosen (see \code{sd_ber}).}
 
 \item{simu}{Number. How many simulations should be performed?
 If not specified, simu is set to 10000.}
+
+\item{create}{"plot" if a plot is to be returned.\cr
+"tab" if a table is to be returned.}
 }
 \value{
 It returns a plot.
 }
 \description{
-That is one of the main functions. 
-It draws a plot of power based on the timing of the internal pilot study. 
+That is one of the main functions.
+It draws a plot of power based on the timing of the internal pilot study.
 If desired, it may represent several actual expected value differences for comparison.
 }
 \seealso{

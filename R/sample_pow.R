@@ -9,7 +9,7 @@
 #' If desired, it may represent several timings for the internal pilot studies for comparison.
 #'
 #' @usage
-#' sample_pow(sd_ber = F, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
+#' sample_pow(sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
 #'            prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
 #'            fix_sim = c("fix", "sim"), simu = 10000)
 #'

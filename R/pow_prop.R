@@ -8,7 +8,7 @@
 #'
 #' @usage
 #' pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-#'          adj = F, regel = F, nbound = 500, simu = 10000)
+#'          adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")
 #'
 #' @param delta
 #' Number. Expectation difference of two samples.
@@ -63,6 +63,10 @@
 #' Number. How many simulations should be performed?
 #' If not specified, simu is set to 10000.
 #'
+#' @param create
+#' "plot" if a plot is to be returned.\cr
+#' "tab" if a table is to be returned.
+#'
 #' @return
 #' It returns a plot.
 #'
@@ -95,6 +99,7 @@
 #' @importFrom flextable border
 #' @importFrom flextable bold
 #' @importFrom flextable width
+#' @importFrom flextable vline
 #' @importFrom officer fp_text
 #' @importFrom officer fp_cell
 #' @importFrom officer fp_border
@@ -102,14 +107,14 @@
 #' @export
 #'
 pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-                     adj = F, regel = F, nbound = 500, simu = 10000){
+                     adj = F, regel = F, nbound = 500, simu = 10000, create = "plot"){
 
   if (length(Delta) > 5){
     stop("Maximum five values for Delta are allowed!")
   }
 
   prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 ), 2)
-  pow_prop <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
+  pow_prop_ <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
                       prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
 
   if (test == 1){
@@ -126,7 +131,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     powplot <- ggplot2::ggplot()
 
     for (j in 1:length(Delta)){
-      pow <- pow_prop[[j]]
+      pow <- pow_prop_[[j]]
       pow_dat <- data.frame(pow = pow, prop = prop_area)
       powplot <- powplot +
         ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow), col = j, size = 1)
@@ -134,7 +139,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
 
     powplot <- powplot +
       ggplot2::coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]),
-                               ylim = c(min(pow_prop[[1]]), max(pow_prop[[length(Delta)]])))
+                               ylim = c(min(pow_prop_[[1]]), max(pow_prop_[[length(Delta)]])))
 
     p1 = rep(-1, 2 * length(Delta))
     p2 = rep(-1, 2 * length(Delta))
@@ -162,7 +167,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
   } else if (create == "tab"){
     pow_d <- c()
     for (i in 1:length(Delta)){
-      pow_d <- cbind(pow_d, pow_prop[[i]])
+      pow_d <- cbind(pow_d, pow_prop_[[i]])
     }
 
     if (length(prop_area) < 6){
