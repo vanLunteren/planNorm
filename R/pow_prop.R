@@ -93,7 +93,11 @@
 pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
                      adj = F, regel = F, nbound = 500, simu = 10000){
 
-  prop_area <- seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 )
+  if (length(Delta) > 5){
+    stop("Maximum five values for Delta are allowed!")
+  }
+
+  prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 ), 2)
   pow_prop <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
                       prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
 
@@ -102,44 +106,129 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
   } else if (test == 2){
     test_n <-"two-sided"
   }
-  ##evtl N0 dazu
-  text <- paste("Settings:", "\n ","delta = ", delta, ", Delta = ", Delta, ", SD = ", sd,
+
+  if (create == "plot"){
+    text <- paste("Settings:", "\n ","delta = ", delta, ", Delta = ", Delta, ", SD = ", sd,
                   "\ntest = ", test_n, ", alpha = ", alpha, ", beta = ", beta,
                   ", nbound = ", nbound )
 
-  powplot <- ggplot2::ggplot()
+    powplot <- ggplot2::ggplot()
 
-  for (j in 1:length(Delta)){
-    pow <- pow_prop[[j]]
-    pow_dat <- data.frame(pow = pow, prop = prop_area)
+    for (j in 1:length(Delta)){
+      pow <- pow_prop[[j]]
+      pow_dat <- data.frame(pow = pow, prop = prop_area)
+      powplot <- powplot +
+        ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow), col = j, size = 1)
+    }
+
     powplot <- powplot +
-      ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow), col = j, size = 1)
+      ggplot2::coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]),
+                               ylim = c(min(pow_prop[[1]]), max(pow_prop[[length(Delta)]])))
+
+    p1 = rep(-1, 2 * length(Delta))
+    p2 = rep(-1, 2 * length(Delta))
+
+    point_leg <- data.frame(p1 = p1, p2 = p2, prop = 1:length(Delta))
+
+    powplot <- powplot +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2), col = factor(prop)) +
+      ggplot2::labs(color = "") +
+      ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)),
+                                  values = c(1:length(Delta))) +
+      ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
+
+    powplot +
+      ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
+      ggplot2::scale_y_continuous(name = "Power") +
+      ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
+      ggplot2::ggtitle("Power") +
+      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
+                     axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+                     panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank(),
+                     panel.background = ggplot2::element_blank())
+
+  } else if (create == "tab"){
+    pow_d <- c()
+    for (i in 1:length(Delta)){
+      pow_d <- cbind(pow_d, pow_prop[[i]])
+    }
+
+    if (length(prop_area) < 6){
+      dat <- data.frame(c(prop_area, rep("", 6 - length(prop_area))),
+                         c(pow_d, rep("", 6 - length(prop_area))),
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)),
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)))
+    } else if (length(prop_area) == 6){
+      dat <- data.frame(prop_area, pow_d,
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)),
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)))
+    } else if (length(prop_area) > 6){
+      dat <- data.frame(prop_area, pow_d,
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound),
+                                      rep("", length(prop_area) - 6)),
+                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound),
+                                      rep("", length(prop_area) - 6)))
+    }
+
+    dat <- flextable::regulartable(data = dat)
+    for (k in 1:6){
+      dat <- flextable::merge_at(dat, i = k, j = (length(Delta) + 2):(length(Delta) + 3), part = "body")
+    }
+    dat <- flextable::merge_at(dat, i = 1, j = (length(Delta) + 2):(length(Delta) + 3), part = "header")
+
+
+
+    if (length(Delta) == 1){
+      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
+                                      X1 = function(x) round(x, 2))
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]))
+    } else if(length(Delta) == 2){
+      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
+                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2))
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
+                            X2 = paste("Delta =", Delta[2]))
+    } else if(length(Delta) == 3){
+      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
+                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
+                                      X3 = function(x) round(x, 2))
+      dat <- flextable::set_header_labels(dat,prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
+                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]))
+    } else if(length(Delta) == 4){
+      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
+                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
+                                      X3 = function(x) round(x, 2), X4 = function(x) round(x, 2))
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
+                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]),
+                            X4 = paste("Delta =", Delta[4]))
+    } else if(length(Delta) == 5){
+      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
+                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
+                                      X3 = function(x) round(x, 2), X4 = function(x) round(x, 2),
+                                      X5 = function(x) round(x, 2))
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
+                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]),
+                            X4 = paste("Delta =", Delta[4]), X5 = paste("Delta =", Delta[5]))
+    }
+
+    dat <- flextable::align(dat, j = 1, align = "left", part = "header")
+    dat <- flextable::align(dat, j = 1, align = "left", part = "all")
+    dat <- flextable::align(dat, j = length(Delta) + 2, align = "right", part = "header")
+    dat <- flextable::align(dat, j = length(Delta) + 2, align = "right", part = "all")
+    dat <- flextable::align(dat, j = 2:(length(Delta) + 1), align = "center", part = "all")
+
+    dat <- flextable::style(dat, pr_t = officer::fp_text(bold = TRUE), part = "header")
+    dat <- flextable::fontsize(dat, size = 11, part = "all")
+
+    def_cell <- officer::fp_cell(border = officer::fp_border(color = "transparent"))
+    dat <- flextable::style(dat , pr_c = def_cell, part = "body")
+    dat <- flextable::vline(x = dat, j = 1, border = officer::fp_border(width = 1), part = "all")
   }
 
-  powplot <- powplot +
-    ggplot2::coord_cartesian(xlim = c(prop_area[1], prop_area[length(prop_area)]),
-                    ylim = c(min(pow_prop[[1]]), max(pow_prop[[length(Delta)]])))
-
-  p1 = rep(-1, 2 * length(Delta))
-  p2 = rep(-1, 2 * length(Delta))
-
-  point_leg <- data.frame(p1 = p1, p2 = p2, prop = 1:length(Delta))
-
-  powplot <- powplot +
-    ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2), col = factor(prop)) +
-    ggplot2::labs(color = "") +
-    ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)),
-                       values = c(1:length(Delta))) +
-    ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
-
-  powplot +
-    ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-    ggplot2::scale_y_continuous(name = "Power") +
-    ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
-    ggplot2::ggtitle("Power") +
-    ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
-          axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
-          panel.grid.major = ggplot2::element_blank(),
-          panel.grid.minor = ggplot2::element_blank(),
-          panel.background = ggplot2::element_blank())
 }
