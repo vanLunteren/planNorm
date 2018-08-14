@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_sample_pow.R
 \name{sim_sample_pow}
 \alias{sim_sample_pow}
-\title{Simulation of the sample size and power.}
+\title{Simulation of the sample size and power}
 \usage{
 sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
                prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000)

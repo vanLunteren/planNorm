@@ -1,5 +1,5 @@
 #' @title
-#' Creates a plot for the sample size and the power based on the standard deviation.
+#' Creates a plot for the sample size and the power based on the standard deviation
 #'
 #' @description
 #' That is one of the main functions.

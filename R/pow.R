@@ -1,5 +1,5 @@
 #' @title
-#' Simulation of the power.
+#' Simulation of the power
 #'
 #' @description
 #' This is an auxiliary function.

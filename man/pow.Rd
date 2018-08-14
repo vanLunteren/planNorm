@@ -2,7 +2,7 @@
 % Please edit documentation in R/pow.R
 \name{pow}
 \alias{pow}
-\title{Simulation of the power.}
+\title{Simulation of the power}
 \usage{
 pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05),
     adj = F, regel = F, nbound = 500, simu = 10000)

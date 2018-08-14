@@ -2,7 +2,7 @@
 % Please edit documentation in R/pow_prop.R
 \name{pow_prop}
 \alias{pow_prop}
-\title{Creates a plot for the power based on the timing of the internal pilot study.}
+\title{Creates a plot for the power based on the timing of the internal pilot study}
 \usage{
 pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
          adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")

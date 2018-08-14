@@ -1,5 +1,5 @@
 #' @title
-#' Simulation of the sample size and the power.
+#' Simulation of the sample size and the power
 #'
 #' @description
 #' This is an auxiliary function.

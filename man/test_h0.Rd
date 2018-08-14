@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_h0.R
 \name{test_h0}
 \alias{test_h0}
-\title{Test a test statistic to see if the null hypothesis can be rejected.}
+\title{Test a test statistic to see if the null hypothesis can be rejected}
 \usage{
 test_h0(test = 1, T, n1, n2, alpha = 0.05, delta = 0)
 }

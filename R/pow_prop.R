@@ -1,5 +1,5 @@
 #' @title
-#' Creates a plot for the power based on the timing of the internal pilot study.
+#' Creates a plot for the power based on the timing of the internal pilot study
 #'
 #' @description
 #' That is one of the main functions.

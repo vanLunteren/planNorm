@@ -1,5 +1,5 @@
 #' @title
-#' Test a test statistic to see if the null hypothesis can be rejected.
+#' Test a test statistic to see if the null hypothesis can be rejected
 #'
 #' @description
 #' This is an important secondary function.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_sample_pow.R
 \name{fix_sample_pow}
 \alias{fix_sample_pow}
-\title{Simulation of the sample size and the power.}
+\title{Simulation of the sample size and the power}
 \usage{
 fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
                simu = 10000)

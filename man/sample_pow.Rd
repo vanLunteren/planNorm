@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample_pow.R
 \name{sample_pow}
 \alias{sample_pow}
-\title{Creates a plot for the sample size and the power based on the standard deviation.}
+\title{Creates a plot for the sample size and the power based on the standard deviation}
 \usage{
 sample_pow(sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
            prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
