@@ -14,7 +14,7 @@ Depends:
   R  (>= 3.3.0)
 Imports:
   flextable,
-  officer,
+  officer (>= 0.2.0),
   scales,
   lazyeval,
   plyr,
