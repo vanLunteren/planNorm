@@ -2,10 +2,10 @@
 #' Creates a plot for the sample size and the power based on the standard deviation.
 #'
 #' @description
-#' That is one of the main functions.
-#' It draws a plot of the sample size and the power based on the standard deviation.
-#' The sample size and power can be calculated for the design with a fixed sample size and / or
-#' with an internal pilot study.
+#' That is one of the main functions.\cr
+#' It draws a plot of the sample size and the power based on the standard deviation.\cr
+#' The sample size and power can be calculated for the design with a fixed sample size and / or\cr
+#' with an internal pilot study.\cr
 #' If desired, it may represent several timings for the internal pilot studies for comparison.
 #'
 #' @usage
@@ -14,48 +14,48 @@
 #'            fix_sim = c("fix", "sim"), simu = 10000, create = "plot")
 #'
 #' @param sd_ber
-#' Sequence of numbers. Interval of the actual standard deviation in the data.
-#' With regard to this interval, the sample size and the power are displayed.
-#' If no interval with more than two numbers but an upper limit is defined (see nbound),
+#' Sequence of numbers. Interval of the actual standard deviation in the data.\cr
+#' With regard to this interval, the sample size and the power are displayed.\cr
+#' If no interval with more than two numbers but an upper limit is defined (see nbound),\cr
 #' a reasonable range is calculated automatically.
 #'
 #' @param delta
-#' Number. Expectation difference of two samples.
-#' If you select a Test for superiority/ difference then select 'delta = 0'.
-#' Only if you select a Test for non-inferiority you can select 'delta != 0'.
-#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically
-#' be applied.
+#' Number. Expectation difference of two samples.\cr
+#' If you select a Test for superiority/ difference then select 'delta = 0'.\cr
+#' Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
+#' Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically\cr
+#' be applied.\cr
 #' If not specified, delta is set to 0.
 #'
 #' @param Delta
 #' Number. Relevant difference of expected values in the alternative hypothesis.
 #'
 #' @param sd
-#' Number. Assumed standard deviation of the data.
+#' Number. Assumed standard deviation of the data.\cr
 #' Used to calculate the originally planned sample size.
 #'
 #' @param test
-#' Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)
-#' or two-sided (Test for difference).
-#' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
-#'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
-#' Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-#' Attention: Choice of delta. (see delta)
+#' Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)\cr
+#' or two-sided (Test for difference).\cr
+#' One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
+#'                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
+#' Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+#' Attention: Choice of delta. (see \code{delta})\cr
 #' If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.
 #'
 #' @param alpha
-#' Number. Desired alpha-level of the test.
+#' Number. Desired alpha-level of the test.\cr
 #' If not specified, alpha is set to 0.05.
 #'
 #' @param beta
-#' Number. Acceptable beta error of the test.
+#' Number. Acceptable beta error of the test.\cr
 #' If not specified, beta is set to 0.2.
 #'
 #' @param prop
-#' Number/ vector of numbers.
-#' Timing of the internal pilot study depending on the originally planned sample size.
+#' Number/ vector of numbers.\cr
+#' Timing of the internal pilot study depending on the originally planned sample size.\cr
 #' If a vector is passed, all timings are displayed.\cr
-#' A maximum of five different values are possible if you choose \code{create = "tab"}.
+#' A maximum of five different values are possible if you choose \code{create = "tab"}.\cr
 #'
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
@@ -64,19 +64,19 @@
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
-#' Number. Upper limit of the sample size.
-#' Attention: Only if you choose nbound can a suitable standard deviation range for the plots
-#' be calculated automatically. If no nbound are defined then a standard deviation range must be chosen
+#' Number. Upper limit of the sample size.\cr
+#' Attention: Only if you choose nbound can a suitable standard deviation range for the plots\cr
+#' be calculated automatically. If no nbound are defined then a standard deviation range must be chosen\cr
 #' (see sd_ber).
 #'
 #' @param fix_sim
-#' Which design should be applied and presented?
-#' "fixed": Design with fixed sample size,
-#' "sim": Design with internal pilot study,
+#' Which design should be applied and presented?\cr
+#' "fixed": Design with fixed sample size,\cr
+#' "sim": Design with internal pilot study,\cr
 #' c("fix", "sim"): both design
 #'
 #' @param simu
-#' Number. How many simulations should be performed?
+#' Number. How many simulations should be performed?\cr
 #' If not specified, simu is set to 10000.
 #'
 #' @param create

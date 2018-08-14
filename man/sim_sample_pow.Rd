@@ -4,64 +4,64 @@
 \alias{sim_sample_pow}
 \title{Simulation of the sample size and power.}
 \usage{
-sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2, 
+sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
                prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000)
 }
 \arguments{
-\item{sd_ber}{Sequence of numbers. Interval of the actual standard deviation in the data. 
+\item{sd_ber}{Sequence of numbers. Interval of the actual standard deviation in the data. \cr
 With regard to this interval, the sample size and the power are computed.}
 
-\item{delta}{Number. Expectation difference of two samples.
-If you select a Test for superiority/ difference then select 'delta = 0'.
-Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
-be applied.
+\item{delta}{Number. Expectation difference of two samples.\cr
+If you select a Test for superiority/ difference then select 'delta = 0'.\cr
+Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically\cr
+be applied.\cr
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number. Relevant difference of expected values in the alternative hypothesis.}
 
-\item{sd}{Number. Assumed standard deviation of the data. 
+\item{sd}{Number. Assumed standard deviation of the data. \cr
 Used to calculate the originally planned number of cases.}
 
-\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)
-or two-sided (Test for difference).
-One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
-                      Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
-Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-Attention: Choice of delta. (see delta)
+\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)\cr
+or two-sided (Test for difference)\cr
+One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
+                      Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
+Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
-\item{alpha}{Number. Desired alpha-level of the test.
+\item{alpha}{Number. Desired alpha-level of the test.\cr
 If not specified, alpha is set to 0.05.}
 
-\item{beta}{Number. Acceptable beta error of the test.
+\item{beta}{Number. Acceptable beta error of the test.\cr
 If not specified, beta is set to 0.2.}
 
-\item{prop}{Number or vector of numbers. Timing of the internal pilot study depending on the originally planned sample size.
+\item{prop}{Number or vector of numbers. Timing of the internal pilot study depending on the originally planned sample size.\cr
 If a vector is passed, all timings within a plot are displayed.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
 \item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
-\item{nbound}{Number. Upper limit of the sample size.
-Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
-be calculated automatically. 
+\item{nbound}{Number. Upper limit of the sample size.\cr
+Attention: Only if you choose nbound can a suitable standard deviation range for the plots \cr
+be calculated automatically. \cr
 If no nbound are defined then a standard deviation range must be chosen (see sd_ber).}
 
-\item{simu}{Number. How many simulations should be performed?
+\item{simu}{Number. How many simulations should be performed?\cr
 If not specified, simu is set to 10000.}
 }
 \value{
-This function only creates the sample size and power values for multiple standard deviations.
-The output is used in the function \code{sample_pow} to visualize the sample size and power depending 
+This function only creates the sample size and power values for multiple standard deviations.\cr
+The output is used in the function \code{sample_pow} to visualize the sample size and power depending \cr
 on the timing of the internal pilot studies.
 }
 \description{
-This is an auxiliary function. 
-It calculates the sample size and power of the design with an internal pilot study for different 
-standard deviations and for multiple timings of the internal pilot studies.
-The originally planned sample size is calculated on the basis of an assumed standard deviation. 
+This is an auxiliary function.
+It calculates the sample size and power of the design with an internal pilot study for different \cr
+standard deviations and for multiple timings of the internal pilot studies.\cr
+The originally planned sample size is calculated on the basis of an assumed standard deviation. \cr
 A distinction is made between one-sided and two-sided tests.
 }
 \seealso{

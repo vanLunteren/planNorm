@@ -10,47 +10,47 @@ fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
 \arguments{
 \item{sd_ber}{Vector of numbers. Interval of an area for the actual standard deviation in the data.}
 
-\item{delta}{Number. Expectation difference of two samples.
-If you select a Test for superiority/ difference then select 'delta = 0'.
-Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
-be applied.
-If not specified, delta is set to 0.}
+\item{delta}{Number. Expectation difference of two samples.\cr
+If you select a Test for superiority/ difference then select 'delta = 0'.\cr
+Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically \cr
+be applied.\cr
+If not specified, delta is set to 0.\cr}
 
 \item{Delta}{Number. Relevant difference of expected values in the alternative hypothesis.}
 
-\item{sd}{Number. Assumed standard deviation of the data. 
+\item{sd}{Number. Assumed standard deviation of the data. \cr
 Used to calculate the originally planned sample size.}
 
-\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)
-or two-sided (Test for difference).
-One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0
-                      Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta
-Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0
-Attention: Choice of delta. (see \code{delta})
+\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)\cr
+or two-sided (Test for difference).\cr
+One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0\cr
+                      Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
-\item{alpha}{Number. Desired alpha-level of the test.
+\item{alpha}{Number. Desired alpha-level of the test.\cr
 If not specified, alpha is set to 0.05.}
 
-\item{beta}{Number. Acceptable beta error of the test.
+\item{beta}{Number. Acceptable beta error of the test.\cr
 If not specified, beta is set to 0.2.}
 
-\item{simu}{Number. How many simulations should be performed?
+\item{simu}{Number. How many simulations should be performed?\cr
 If not specified, simu is set to 10000.}
 }
 \value{
-This function only creates the sample size and Power values for multiple actual standard deviation values.
+This function only creates the sample size and Power values for multiple actual standard deviation values.\cr
 The output is used in the function sample_pow to visualize the sample size and the power.
 }
 \description{
-This is an auxiliary function. 
-It calculates the sample size and the simulated power of a fixed-sample design.
-The originally planned sample size is calculated on the basis of an assumed standard deviation. 
+This is an auxiliary function.
+It calculates the sample size and the simulated power of a fixed-sample design.\cr
+The originally planned sample size is calculated on the basis of an assumed standard deviation.\cr
 A distinction is made between one-sided and two-sided tests.
 }
 \author{
-Csilla van Lunteren 
+Csilla van Lunteren
 
  @seealso
 \code{\link{fix_calc}}

@@ -4,7 +4,7 @@
 \alias{sim_p_calc}
 \title{Decision regarding test statistics (Design with internal pilot study)}
 \usage{
-sim_p_calc(n1, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, N0, 
+sim_p_calc(n1, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, N0,
 adj = F, regel = F, nbound = 500)
 }
 \arguments{
@@ -13,13 +13,13 @@ adj = F, regel = F, nbound = 500)
 \item{delta}{Number. Expectation difference of two samples.
 If you select a Test for superiority/ difference then select 'delta = 0'.
 Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically
 be applied.
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number/ Vector of numbers. Relevant difference of expected values in the alternative hypothesis.}
 
-\item{sd}{Number. Assumed standard deviation of the data. 
+\item{sd}{Number. Assumed standard deviation of the data.
 Used to calculate the originally planned number of cases.}
 
 \item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)
@@ -43,8 +43,8 @@ If not specified, beta is set to 0.2.}
 \item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.
-Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
-be calculated automatically. 
+Attention: Only if you choose nbound can a suitable standard deviation range for the plots
+be calculated automatically.
 If no nbound are defined then a standard deviation range must be chosen (see \code{sd_ber}).}
 }
 \value{

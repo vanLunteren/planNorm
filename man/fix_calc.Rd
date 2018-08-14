@@ -14,7 +14,7 @@ fix_calc(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2)
 \item{delta}{Number. Expectation difference of two samples.
 If you select a Test for superiority/ difference then select 'delta = 0'.
 Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically
 be applied.
 If not specified, delta is set to 0.}
 
@@ -41,7 +41,7 @@ This function returns a value if the simulation study rejects (1) or can not rej
 This is an auxiliary function of \code{\link{fix_sample_pow}}.
 }
 \author{
-Csilla van Lunteren 
+Csilla van Lunteren
 
  @seealso
 \code{\link{test_h0}}

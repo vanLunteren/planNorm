@@ -4,7 +4,7 @@
 \alias{sim_calc}
 \title{Sample size and decision regarding test statistics}
 \usage{
-sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2, 
+sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
          adj = F, regel = F, nbound = 500)
 }
 \arguments{
@@ -17,7 +17,7 @@ sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
 \item{delta}{Number. Expectation difference of two samples.
 If you select a Test for superiority/ difference then select 'delta = 0'.
 Only if you select a Test for non-inferiority you can select 'delta != 0'.
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically 
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically
 be applied.
 If not specified, delta is set to 0.}
 
@@ -42,8 +42,8 @@ If not specified, beta is set to 0.2.}
 \item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.
-Attention: Only if you choose nbound can a suitable standard deviation range for the plots 
-be calculated automatically. 
+Attention: Only if you choose nbound can a suitable standard deviation range for the plots
+be calculated automatically.
 If no nbound are defined then a standard deviation range must be chosen (see sd_ber).}
 }
 \value{
