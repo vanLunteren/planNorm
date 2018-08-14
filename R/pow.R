@@ -3,7 +3,7 @@
 #'
 #' @description
 #' This is an auxiliary function.
-#' It calculates the power of the design with an internal pilot study for different timings of the\
+#' It calculates the power of the design with an internal pilot study for different timings of the
 #' pilot study and for multiple actual differences in expected differences.
 #' The originally planned sample size is calculated on the basis of an assumed standard deviation.
 #' A distinction is made between one-sided and two-sided tests.
@@ -115,7 +115,7 @@ pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop 
 #' Decision regarding test statistics (Design with internal pilot study)
 #'
 #' @description
-#' This is an auxiliary function of \code{\link{pow}}.
+#' This is an auxiliary function of 'pow'.
 #'
 #' @usage
 #' sim_p_calc(n1, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, N0,

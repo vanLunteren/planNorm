@@ -38,7 +38,7 @@ If not specified, beta is set to 0.2.}
 This function returns a value if the simulation study rejects (1) or can not reject (0) the null hypothesis.
 }
 \description{
-This is an auxiliary function of \code{\link{fix_sample_pow}}.
+This is an auxiliary function of 'fix_sample_pow'.
 }
 \author{
 Csilla van Lunteren

@@ -50,7 +50,7 @@ If no nbound are defined then a standard deviation range must be chosen (see sd_
 This function returns a value if the simulation study rejects (1) or can not reject (0) the null hypothesis.
 }
 \description{
-This is an auxiliary function of \code{\link{sim_sample_pow}}.
+This is an auxiliary function of 'sim_sample_pow'.
 }
 \seealso{
 \code{\link{test_h0}}

@@ -56,7 +56,7 @@ for different true expected value differences.
 }
 \description{
 This is an auxiliary function.
-It calculates the power of the design with an internal pilot study for different timings of the\
+It calculates the power of the design with an internal pilot study for different timings of the
 pilot study and for multiple actual differences in expected differences.
 The originally planned sample size is calculated on the basis of an assumed standard deviation.
 A distinction is made between one-sided and two-sided tests.

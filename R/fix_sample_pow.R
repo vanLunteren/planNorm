@@ -96,7 +96,7 @@ fix_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05
 #' Decision regarding test statistics (Design with fix sample size)
 #'
 #' @description
-#' This is an auxiliary function of \code{\link{fix_sample_pow}}.
+#' This is an auxiliary function of 'fix_sample_pow'.
 #'
 #' @usage
 #' fix_calc(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2)

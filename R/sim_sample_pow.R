@@ -116,7 +116,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.0
 #' Sample size and decision regarding test statistics
 #'
 #' @description
-#' This is an auxiliary function of \code{\link{sim_sample_pow}}.
+#' This is an auxiliary function of 'sim_sample_pow'.
 #'
 #' @usage
 #' sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
