@@ -19,7 +19,8 @@
 #' If not specified, delta is set to 0.
 #'
 #' @param Delta
-#' Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.
+#' Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.\cr
+#' A maximum of five different values are possible if you choose \code{create = "tab"}.
 #'
 #' @param sd
 #' Number. Assumed standard deviation of the data.
@@ -43,9 +44,12 @@
 #' If not specified, beta is set to 0.2.
 #'
 #' @param prop
-#' Vector of two Numbers. Timing of the internal pilot study depending on the originally planned sample size.
+#' Two numbers/ Vector of numbers. Timing of the internal pilot study depending on the originally planned
+#' sample size.
 #' Two numbers must be passed, the smallest and largest timing of the internal pilot study.
-#' The plot is displayed for the interval of these two values.
+#' The plot is displayed for the interval of these values.
+#' If two values are transferred, a sequence is automatically defined.
+#' If several values are transferred, these are interreted as a sequence.
 #'
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
@@ -103,17 +107,20 @@
 #' @importFrom officer fp_text
 #' @importFrom officer fp_cell
 #' @importFrom officer fp_border
-#' @import ggplot2
+#'
 #' @export
 #'
 pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
                      adj = F, regel = F, nbound = 500, simu = 10000, create = "plot"){
 
-  if (length(Delta) > 5){
+  if (length(Delta) > 5 & create == "tab"){
     stop("Maximum five values for Delta are allowed!")
   }
 
-  prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 ), 2)
+  if (length(prop) == 2){
+    prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 ), 2)
+  }
+
   pow_prop_ <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
                       prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
 
@@ -170,68 +177,58 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
       pow_d <- cbind(pow_d, pow_prop_[[i]])
     }
 
-    if (length(prop_area) < 6){
-      dat <- data.frame(c(prop_area, rep("", 6 - length(prop_area))),
-                         c(pow_d, rep("", 6 - length(prop_area))),
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)),
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)))
-    } else if (length(prop_area) == 6){
-      dat <- data.frame(prop_area, pow_d,
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)),
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound)))
-    } else if (length(prop_area) > 6){
-      dat <- data.frame(prop_area, pow_d,
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound),
-                                      rep("", length(prop_area) - 6)),
-                         Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
-                                      paste("alpha = ", alpha), paste("beta = ", beta), paste("nbound = ", nbound),
-                                      rep("", length(prop_area) - 6)))
-    }
+    dat <- data.frame(prop_area = c(prop_area, rep(" ", max(0, 6 - length(prop_area)))),
+                      pow = rbind(pow_d, rep(" ", max(0, 6 - length(prop_area))),
+                                  rep(" ", max(0, 6 - length(prop_area)))),
+                      Settings = c(paste("delta = ", delta), paste("SD = ", sd), paste("test = ", test_n),
+                                   paste("alpha = ", alpha), paste("beta = ", beta),
+                                   paste("nbound = ", nbound), rep(" ", max(0, length(prop_area) - 6))))
 
     dat <- flextable::regulartable(data = dat)
-    for (k in 1:6){
-      dat <- flextable::merge_at(dat, i = k, j = (length(Delta) + 2):(length(Delta) + 3), part = "body")
-    }
-    dat <- flextable::merge_at(dat, i = 1, j = (length(Delta) + 2):(length(Delta) + 3), part = "header")
-
-
 
     if (length(Delta) == 1){
-      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
-                                      X1 = function(x) round(x, 2))
-      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]))
-    } else if(length(Delta) == 2){
-      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
-                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2))
-      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
-                            X2 = paste("Delta =", Delta[2]))
-    } else if(length(Delta) == 3){
-      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
-                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
-                                      X3 = function(x) round(x, 2))
-      dat <- flextable::set_header_labels(dat,prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
-                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]))
-    } else if(length(Delta) == 4){
-      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
-                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
-                                      X3 = function(x) round(x, 2), X4 = function(x) round(x, 2))
-      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
-                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]),
-                            X4 = paste("Delta =", Delta[4]))
-    } else if(length(Delta) == 5){
-      dat <- flextable::set_formatter(dat, prop_area = function(x) round(x, 2),
-                                      X1 = function(x) round(x, 2), X2 = function(x) round(x, 2),
-                                      X3 = function(x) round(x, 2), X4 = function(x) round(x, 2),
-                                      X5 = function(x) round(x, 2))
-      dat <- flextable::set_header_labels(dat, prop_area = "Timing", X1 = paste("Delta =", Delta[1]),
-                            X2 = paste("Delta =", Delta[2]), X3 = paste("Delta =", Delta[3]),
-                            X4 = paste("Delta =", Delta[4]), X5 = paste("Delta =", Delta[5]))
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow = "Power", Settings = "Settings")
+      dat <- flextable::add_header(dat, prop_area = " ", pow = "Delta =", Settings = " ", top = FALSE)
+      dat <- flextable::add_header(dat, prop_area = " ", pow = Delta, Settings = " ", top = FALSE)
+    } else if (length(Delta) == 2){
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow.1 = "Power", pow.2 = "Power",
+                                          Settings = "Settings", top = FALSE)
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = "Delta =", pow.2 = "Delta =",
+                                   Settings = " ")
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = Delta[1], pow.2 = Delta[2], Settings = "",
+                                   top = FALSE)
+    } else if (length(Delta) == 3){
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow.1 = "Power", pow.2 = "Power",
+                                          pow.3 = "Power", Settings = "Settings")
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = "Delta =", pow.2 = "Delta =",
+                                   pow.3 = "Delta =", Settings = " ", top = FALSE)
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = Delta[1], pow.2 = Delta[2],
+                                   pow.3 = Delta[3], Settings = " ", top = FALSE)
+    } else if (length(Delta) == 4){
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow.1 = "Power", pow.2 = "Power",
+                                          pow.3 = "Power", pow.4 = "Power", Settings = "Settings")
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = "Delta =", pow.2 = "Delta =",
+                                   pow.3 = "Delta =", pow.4 = "Delta =", Settings = " ", top = FALSE)
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = Delta[1], pow.2 = Delta[2],
+                                   pow.3 = Delta[3], pow.4 = Delta[4], Settings = " ", top = FALSE)
+    } else if (length(Delta) == 5){
+      dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow.1 = "Power", pow.2 = "Power",
+                                          pow.3 = "Power", pow.4 = "Power", pow.5 = "Power",
+                                          Settings = "Settings")
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = "Delta =", pow.2 = "Delta =",
+                                   pow.3 = "Delta =", pow.4 = "Delta =", pow.5 = "Delta =", Settings = " ",
+                                   top = FALSE)
+      dat <- flextable::add_header(dat, prop_area = " ", pow.1 = Delta[1], pow.2 = Delta[2],
+                                   pow.3 = Delta[3], pow.4 = Delta[4], pow.5 = Delta[5], Settings = " ",
+                                   top = FALSE)
     }
+
+    dat <- flextable::merge_at(dat, i = 1, j = 2:(2 + length(Delta) - 1), part = "head")
+    dat <- flextable::merge_at(dat, i = 2, j = 2:(2 + length(Delta) - 1), part = "head")
+
+    dat <- flextable::autofit(dat)
+
+
 
     dat <- flextable::align(dat, j = 1, align = "left", part = "header")
     dat <- flextable::align(dat, j = 1, align = "left", part = "all")
@@ -243,8 +240,11 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     dat <- flextable::fontsize(dat, size = 11, part = "all")
 
     def_cell <- officer::fp_cell(border = officer::fp_border(color = "transparent"))
-    dat <- flextable::style(dat , pr_c = def_cell, part = "body")
-    dat <- flextable::vline(x = dat, j = 1, border = officer::fp_border(width = 1), part = "all")
+    dat <- flextable::style(dat , pr_c = def_cell, part = "all")
+
+    dat <- flextable::vline(x = dat, j = c(1, 1 + length(Delta)), border = officer::fp_border(width = 1), part = "all")
+    dat <- flextable::hline(x = dat, i = 1, border = officer::fp_border(width = 1), part = "head")
+    dat <- flextable::hline(x = dat, i = 3, border = officer::fp_border(width = 2), part = "head")
   }
 
 }

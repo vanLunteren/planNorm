@@ -15,7 +15,8 @@ Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiorit
 be applied.
 If not specified, delta is set to 0.}
 
-\item{Delta}{Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.}
+\item{Delta}{Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.\cr
+A maximum of five different values are possible if you choose \code{create = "tab"}.}
 
 \item{sd}{Number. Assumed standard deviation of the data.
 Used to calculate the originally planned number of cases.}
@@ -34,9 +35,12 @@ If not specified, alpha is set to 0.05.}
 \item{beta}{Number. Acceptable beta error of the test.
 If not specified, beta is set to 0.2.}
 
-\item{prop}{Vector of two Numbers. Timing of the internal pilot study depending on the originally planned sample size.
+\item{prop}{Two numbers/ Vector of numbers. Timing of the internal pilot study depending on the originally planned
+sample size.
 Two numbers must be passed, the smallest and largest timing of the internal pilot study.
-The plot is displayed for the interval of these two values.}
+The plot is displayed for the interval of these values.
+If two values are transferred, a sequence is automatically defined.
+If several values are transferred, these are interreted as a sequence.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 

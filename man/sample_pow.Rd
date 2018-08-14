@@ -6,7 +6,7 @@
 \usage{
 sample_pow(sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
            prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
-           fix_sim = c("fix", "sim"), simu = 10000)
+           fix_sim = c("fix", "sim"), simu = 10000, create = "plot")
 }
 \arguments{
 \item{sd_ber}{Sequence of numbers. Interval of the actual standard deviation in the data.
@@ -40,9 +40,10 @@ If not specified, alpha is set to 0.05.}
 \item{beta}{Number. Acceptable beta error of the test.
 If not specified, beta is set to 0.2.}
 
-\item{prop}{Number or vector of numbers.
+\item{prop}{Number/ vector of numbers.
 Timing of the internal pilot study depending on the originally planned sample size.
-If a vector is passed, all timings within a plot are displayed.}
+If a vector is passed, all timings are displayed.\cr
+A maximum of five different values are possible if you choose \code{create = "tab"}.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
@@ -50,7 +51,8 @@ If a vector is passed, all timings within a plot are displayed.}
 
 \item{nbound}{Number. Upper limit of the sample size.
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots
-be calculated automatically. If no nbound are defined then a standard deviation range must be chosen (see sd_ber).}
+be calculated automatically. If no nbound are defined then a standard deviation range must be chosen
+(see sd_ber).}
 
 \item{fix_sim}{Which design should be applied and presented?
 "fixed": Design with fixed sample size,
@@ -59,6 +61,9 @@ c("fix", "sim"): both design}
 
 \item{simu}{Number. How many simulations should be performed?
 If not specified, simu is set to 10000.}
+
+\item{create}{"plot" if a plot is to be returned.\cr
+"tab" if a table is to be returned.}
 }
 \value{
 It returns a plot.
