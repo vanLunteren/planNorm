@@ -69,10 +69,10 @@ If not specified, simu is set to 10000.}
 It returns a plot.
 }
 \description{
-That is one of the main functions.\cr
-It draws a plot of the sample size and the power based on the standard deviation.\cr
-The sample size and power can be calculated for the design with a fixed sample size and / or\cr
-with an internal pilot study.\cr
+That is one of the main functions.
+It draws a plot of the sample size and the power based on the standard deviation.
+The sample size and power can be calculated for the design with a fixed sample size and / or
+with an internal pilot study.
 If desired, it may represent several timings for the internal pilot studies for comparison.
 }
 \seealso{

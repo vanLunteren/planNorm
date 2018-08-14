@@ -37,8 +37,8 @@ The value 0 or 1 will be returned. \cr
 1 means the null hypothesis is rejected to the level alpha.
 }
 \description{
-This is an important secondary function. \cr
-It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic. \cr
+This is an important secondary function.
+It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic.
 Three cases of hypotheses can be considered: test for superiority, test for non-inferiority, test for difference.
 }
 \details{

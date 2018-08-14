@@ -2,10 +2,10 @@
 #' Simulation of the power.
 #'
 #' @description
-#' This is an auxiliary function. \cr
-#' It calculates the power of the design with an internal pilot study for different timings of the\cr
-#' pilot study and for multiple actual differences in expected differences.\cr
-#' The originally planned sample size is calculated on the basis of an assumed standard deviation.\cr
+#' This is an auxiliary function.
+#' It calculates the power of the design with an internal pilot study for different timings of the\
+#' pilot study and for multiple actual differences in expected differences.
+#' The originally planned sample size is calculated on the basis of an assumed standard deviation.
 #' A distinction is made between one-sided and two-sided tests.
 #'
 #' @usage

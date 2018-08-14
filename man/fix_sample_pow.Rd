@@ -45,8 +45,8 @@ The output is used in the function sample_pow to visualize the sample size and t
 }
 \description{
 This is an auxiliary function.
-It calculates the sample size and the simulated power of a fixed-sample design.\cr
-The originally planned sample size is calculated on the basis of an assumed standard deviation.\cr
+It calculates the sample size and the simulated power of a fixed-sample design.
+The originally planned sample size is calculated on the basis of an assumed standard deviation.
 A distinction is made between one-sided and two-sided tests.
 }
 \author{

@@ -2,8 +2,8 @@
 #' Test a test statistic to see if the null hypothesis can be rejected.
 #'
 #' @description
-#' This is an important secondary function. \cr
-#' It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic. \cr
+#' This is an important secondary function.
+#' It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic.
 #' Three cases of hypotheses can be considered: test for superiority, test for non-inferiority, test for difference.
 #'
 #' @usage

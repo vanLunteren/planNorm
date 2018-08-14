@@ -3,7 +3,7 @@
 #'
 #' @description
 #' That is one of the main functions.
-#' It draws a plot of power based on the timing of the internal pilot study.\cr
+#' It draws a plot of power based on the timing of the internal pilot study.
 #' If desired, it may represent several actual expected value differences for comparison.
 #'
 #' @usage
