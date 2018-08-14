@@ -567,7 +567,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
     dat <- flextable::hline(x = dat, i = 1, border = officer::fp_border(width = 1), part = "head")
     dat <- flextable::hline(x = dat, i = 3, border = officer::fp_border(width = 2), part = "head")
 
-
+    dat
   }
 
 

@@ -245,6 +245,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     dat <- flextable::vline(x = dat, j = c(1, 1 + length(Delta)), border = officer::fp_border(width = 1), part = "all")
     dat <- flextable::hline(x = dat, i = 1, border = officer::fp_border(width = 1), part = "head")
     dat <- flextable::hline(x = dat, i = 3, border = officer::fp_border(width = 2), part = "head")
+    dat
   }
 
 }
