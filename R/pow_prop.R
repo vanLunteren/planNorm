@@ -131,7 +131,11 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
   }
 
   if (create == "plot"){
-    text <- paste("Settings:", "\n ","delta = ", delta, ", Delta = ", Delta, ", SD = ", sd,
+    del <- Delta[1]
+    for (m in 2:length(Delta)){
+      del <- paste(del, ",", Delta[m])
+    }
+    text <- paste("Settings:", "\n ","delta = ", delta, ", Delta = ", del, ", SD = ", sd,
                   "\ntest = ", test_n, ", alpha = ", alpha, ", beta = ", beta,
                   ", nbound = ", nbound )
 
