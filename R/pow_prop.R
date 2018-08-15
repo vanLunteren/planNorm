@@ -119,6 +119,8 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
 
   if (length(prop) == 2){
     prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 10 ), 2)
+  } else if (length(prop) >= 2){
+    prop_area <- prop
   }
 
   Delta <- sort(Delta)
