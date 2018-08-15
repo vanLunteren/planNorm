@@ -118,7 +118,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
   }
 
   if (length(prop) == 2){
-    prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 20 ), 2)
+    prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 10 ), 2)
   }
 
   pow_prop_ <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
