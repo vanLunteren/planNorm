@@ -142,10 +142,10 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     powplot <- ggplot2::ggplot()
 
     for (j in 1:length(Delta)){
-      pow <- pow_prop_[[j]]
-      pow_dat <- data.frame(pow = pow, prop = prop_area)
+      pow_ <- pow_prop_[[j]]
+      pow_dat <- data.frame(pow_ = pow_, prop = prop_area)
       powplot <- powplot +
-        ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow), col = j, size = 1)
+        ggplot2::geom_line(data = pow_dat, ggplot2::aes( x = prop, y = pow_), col = j, size = 1)
     }
 
     powplot <- powplot +
@@ -158,7 +158,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     point_leg <- data.frame(p1 = p1, p2 = p2, prop = 1:length(Delta))
 
     powplot <- powplot +
-      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2), col = factor(prop)) +
+      ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2, col = factor(prop))) +
       ggplot2::labs(color = "") +
       ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)),
                                   values = c(1:length(Delta))) +
