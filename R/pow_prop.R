@@ -121,6 +121,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     prop_area <- round(seq(min(prop), max(prop), (max(prop) - min(prop)) / 10 ), 2)
   }
 
+  Delta <- sort(Delta)
   pow_prop_ <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
                       prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
 
@@ -160,8 +161,8 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
     powplot <- powplot +
       ggplot2::geom_line(data = point_leg, ggplot2::aes(x = p1, y = p2, col = factor(prop))) +
       ggplot2::labs(color = "") +
-      ggplot2::scale_color_manual(labels = c(paste("Delta =", Delta)),
-                                  values = c(1:length(Delta))) +
+      ggplot2::scale_color_manual(labels = c(paste("Delta =", sort(Delta, decreasing=TRUE))),
+                                  values = c(length(Delta):1)) +
       ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
 
     powplot +
