@@ -84,7 +84,8 @@ fix_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05
       N <- ceiling(4 * (stats::qnorm(1 - alpha / 2) + stats::qnorm(1 - beta))^2 * sd_ber^2 / Delta^2)
     }
 
-    abg <- replicate(simu, fix_calc(N0, sd_ber, delta, Delta, test, alpha, beta))
+    abg <- replicate(simu, fix_calc(N0 = N0, sd_ber = sd_ber, delta = delta, Delta = Delta, test = test,
+                                    alpha = alpha, beta = beta))
 
     return (c(N, mean(abg)))
   }, sd_ber)
@@ -157,5 +158,5 @@ fix_calc <- function(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta 
   }
 
   T <- sqrt((length(X) * length(Y)) / (length(X) + length(Y))) * (mean(X) - mean(Y) - delta) / S_gepoolt
-  return (test_h0(test, T, length(X), length(Y), alpha, delta))
+  return (test_h0(test = test, T = T, alpha = alpha, delta =delta))
 }

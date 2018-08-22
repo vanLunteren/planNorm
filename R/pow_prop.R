@@ -199,9 +199,9 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
       dat <- flextable::add_header(dat, prop_area = " ", pow = Delta, Settings = " ", top = FALSE)
     } else if (length(Delta) == 2){
       dat <- flextable::set_header_labels(dat, prop_area = "Timing", pow.1 = "Power", pow.2 = "Power",
-                                          Settings = "Settings", top = FALSE)
+                                          Settings = "Settings")
       dat <- flextable::add_header(dat, prop_area = " ", pow.1 = "Delta =", pow.2 = "Delta =",
-                                   Settings = " ")
+                                   Settings = " ", top = FALSE)
       dat <- flextable::add_header(dat, prop_area = " ", pow.1 = Delta[1], pow.2 = Delta[2], Settings = "",
                                    top = FALSE)
     } else if (length(Delta) == 3){

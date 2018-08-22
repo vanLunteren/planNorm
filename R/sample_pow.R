@@ -150,16 +150,16 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
 
   if (is.numeric(sd_ber) & length(sd_ber) == 2){
     sd_ber <- seq(min(sd_ber), max(sd_ber), (max(sd_ber) - min(sd_ber)) / 25)
-  }  else if(is.numeric(sd_ber) & length(sd_ber) >= 2){
+  }  else if (is.numeric(sd_ber) & length(sd_ber) >= 2){
     sd_ber <- sort(sd_ber)
-  }  else{
+  }  else {
     sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.95)) *
                  (Delta - delta))
     sd_max <- (1 / 2 * sqrt(nbound) * 1 / (stats::qnorm(1 - alpha) + stats::qnorm(0.18)) * (Delta - delta))
     sd_ber <- round(seq(sd_min, sd_max, (sd_max - sd_min) / 25), 2)
   }
 
-  if ("fix" %in% fix_sim){
+  if ("fix" %in% fix_sim) {
     N_pow_f <- fix_sample_pow(sd_ber = sd_ber, delta = delta, Delta = Delta, sd = sd, test = test,
                               alpha = alpha, beta = beta, simu = simu)
   }
@@ -348,7 +348,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                                      paste("beta = ", beta), paste("nbound = ", nbound),
                                      rep(" ", max(0, length(sd_ber) - 8))))
 
-    } else if("fix" %in% fix_sim & !("sim" %in% fix_sim)){
+    } else if ("fix" %in% fix_sim & !("sim" %in% fix_sim)){
       dat <- data.frame(sd_ber = c(sd_ber, rep(" ", max(0, 7 - length(sd_ber)))),
                         N_f = c(N_pow_f[1, ], rep(" ", max(0, 7 - length(sd_ber)))),
                         p_f = c(N_pow_f[2, ], rep(" ", max(0, 7 - length(sd_ber)))),
@@ -356,7 +356,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                                      paste("N0 = ", N0), paste("test = ", test_n), paste("alpha = ", alpha),
                                      paste("beta = ", beta), rep(" ", max(0, length(sd_ber) - 7))))
 
-    } else if(!("fix" %in% fix_sim) & "sim" %in% fix_sim){
+    } else if (!("fix" %in% fix_sim) & "sim" %in% fix_sim){
       simN <- c()
       simpow <- c()
       for (j in 1:length(prop)){
@@ -428,7 +428,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                                      N_s.N_.2 = prop[3], N_s.N_.3 = prop[4], p_f = " ", p_s.pow_ = prop[1],
                                      p_s.pow_.1 = prop[2], p_s.pow_.2 = prop[3], p_s.pow_.3 = prop[4],
                                      Settings = " ", top = FALSE )
-      }else if(length(prop) == 5){
+      } else if (length(prop) == 5){
         dat <- flextable::set_header_labels(dat, sd_ber = "SD", N_f = "Sample size", N_s.N_ = "Sample size",
                                             N_s.N_.1 = "Sample size", N_s.N_.2 = "Sample size",
                                             N_s.N_.3 = "Sample size", N_s.N_.4 = "Sample size",
@@ -482,7 +482,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
         dat <- flextable::add_header(dat, sd_ber = " ", N_s.N_ = prop[1], N_s.N_.1 = prop[2],
                                      N_s.N_.2 = prop[3], p_s.pow_ = prop[1], p_s.pow_.1 = prop[2],
                                      p_s.pow_.2 = prop[3], Settings = " ", top = FALSE )
-      }else if(length(prop) == 4){
+      } else if (length(prop) == 4){
         dat <- flextable::set_header_labels(dat, sd_ber = "SD", N_s.N_ = "Sample size",
                                             N_s.N_.1 = "Sample size", N_s.N_.2 = "Sample size",
                                             N_s.N_.3 = "Sample size", p_s.pow_ = "Power",
@@ -496,7 +496,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                                      N_s.N_.2 = prop[3], N_s.N_.3 = prop[4], p_s.pow_ = prop[1],
                                      p_s.pow_.1 = prop[2], p_s.pow_.2 = prop[3], p_s.pow_.3 = prop[4],
                                      Settings = " ", top = FALSE )
-      }else if(length(prop) == 5){
+      } else if (length(prop) == 5){
         dat <- flextable::set_header_labels(dat, sd_ber = "SD", N_s.N_ = "Sample size",
                                             N_s.N_.1 = "Sample size", N_s.N_.2 = "Sample size",
                                             N_s.N_.3 = "Sample size", N_s.N_.4 = "Sample size",

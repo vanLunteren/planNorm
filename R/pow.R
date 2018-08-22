@@ -226,5 +226,5 @@ sim_p_calc <- function(n1, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 
 
   T <- sqrt((length(X_h1) * length(Y_h1)) / (length(X_h1) + length(Y_h1))) *
         (mean(X_h1) - mean(Y_h1) - delta) / S_gepoolt_h1
-  return (test_h0(test, T, length(X_h1), length(Y_h1), alpha, delta))
+  return (test_h0(test = test, T = T, n1 = length(X_h1), n2 = length(Y_h1), alpha = alpha, delta = delta))
 }

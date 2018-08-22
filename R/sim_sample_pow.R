@@ -238,5 +238,6 @@ sim_calc <- function (n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, 
   T_h1 <- sqrt((length(X_h1) * length(Y_h1)) / (length(X_h1) + length(Y_h1))) *
             (mean(X_h1) - mean(Y_h1) - delta) / S_gepoolt_h1
 
-  return (c(max(n1, N_h0), test_h0(test, T_h1, length(X_h1), length(Y_h1), alpha, delta)))
+  return (c(max(n1, N_h0), test_h0(test = test, T = T_h1, n1 = length(X_h1), n2 = length(Y_h1), alpha = alpha,
+                                   delta = delta)))
 }
