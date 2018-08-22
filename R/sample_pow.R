@@ -132,6 +132,7 @@
 sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
                         prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500, fix_sim = c("fix", "sim"),
                         simu = 10000, create = "plot"){
+
   if (length(prop) > 5 & create == "tab"){
     stop("Maximum five values for prop are allowed!")
   }
@@ -219,7 +220,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
       y = rep(-1, 2 * (length(prop) + 1))
       point_leg <- data.frame(x = x, y = y, prop = rep(1:(length(prop) + 1), 2))
       pplot <- pplot +
-        ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+        ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, col = factor(prop))) +
         ggplot2::labs(color = "") +
         ggplot2::scale_color_manual(labels = c("fix", paste("prop =",prop)),
                                     values = c("darkgray", 1:length(prop))) +
@@ -228,7 +229,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
       point_leg <- data.frame(x = c(-1, -1), y = c(-1, -1), prop = c(1, 1))
 
       pplot <- pplot +
-        ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, color = factor(prop))) +
+        ggplot2::geom_line(data = point_leg, ggplot2::aes(x = x, y = y, col = factor(prop))) +
         ggplot2::labs(color = "") +
         ggplot2::scale_color_manual(labels = "fix", values = "black") +
         ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
@@ -241,8 +242,8 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                                   breaks = seq(round(min(sd_ber)), round(max(sd_ber)),
                                                round((max(sd_ber) - min(sd_ber)) / 10))) +
       ggplot2::ggtitle("Sample Size") +
-      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
-                     axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, color = "black"),
+                     axis.line.y = ggplot2::element_line(size = 0.5, color = "black"),
                      panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank(),
                      panel.background = ggplot2::element_blank())
@@ -269,7 +270,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
         }
         pow_sim <- data.frame(N = N, sd = sd_ber)
         powplot <- powplot +
-          ggplot2::geom_line(data = pow_sim, ggplot2::aes( x = sd, y = N ), col = j, size = 1)
+          ggplot2::geom_line(data = pow_sim, ggplot2::aes( x = sd, y = N), col = j, size = 1)
       }
     }
 
@@ -569,6 +570,4 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
 
     dat
   }
-
-
 }

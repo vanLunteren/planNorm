@@ -172,8 +172,8 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
       ggplot2::scale_y_continuous(name = "Power") +
       ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
       ggplot2::ggtitle("Power") +
-      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, colour = "black"),
-                     axis.line.y = ggplot2::element_line(size = 0.5, colour = "black"),
+      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, col = "black"),
+                     axis.line.y = ggplot2::element_line(size = 0.5, col = "black"),
                      panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank(),
                      panel.background = ggplot2::element_blank())

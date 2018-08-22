@@ -61,6 +61,7 @@
 #' @export
 
 test_h0 <- function (test = 1, T, n1 = NA, n2 = NA, alpha = 0.05, delta = 0){
+
   if (is.na(n1) & is.na(n2)){
     if (test == 1){
       quantil <- stats::qnorm(1 - alpha)

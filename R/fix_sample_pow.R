@@ -149,6 +149,7 @@ fix_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05
 #' @export
 #'
 fix_calc <- function(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2){
+
   X <- stats::rnorm(n = N0 / 2, mean = Delta, sd = sd_ber)
   Y <- stats::rnorm(n = N0 / 2, mean = 0, sd = sd_ber)
 
@@ -158,5 +159,5 @@ fix_calc <- function(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta 
   }
 
   T <- sqrt((length(X) * length(Y)) / (length(X) + length(Y))) * (mean(X) - mean(Y) - delta) / S_gepoolt
-  return (test_h0(test = test, T = T, alpha = alpha, delta =delta))
+  return (test_h0(test = test, T = T, alpha = alpha, delta = delta))
 }
