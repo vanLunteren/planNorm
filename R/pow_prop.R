@@ -167,16 +167,18 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
                                   values = c(length(Delta):1)) +
       ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
 
-    powplot +
+    powplot <- powplot +
       ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
       ggplot2::scale_y_continuous(name = "Power") +
       ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
       ggplot2::ggtitle("Power") +
-      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, col = "black"),
-                     axis.line.y = ggplot2::element_line(size = 0.5, col = "black"),
+      ggplot2::theme(axis.line.x = ggplot2::element_line(size = 0.5, color = "black"),
+                     axis.line.y = ggplot2::element_line(size = 0.5, color = "black"),
                      panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank(),
                      panel.background = ggplot2::element_blank())
+
+    powplot
 
   } else if (create == "tab"){
     pow_d <- c()
