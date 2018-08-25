@@ -85,7 +85,6 @@
 sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
                              prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000){
 
-  set.seed(12021994)
   if (delta != 0 & test == 2){
     stop("When choosing a two-sided hypothesis test (test for differences), delta = 0 must be selected.")
   }
