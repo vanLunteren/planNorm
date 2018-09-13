@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_sample_pow.R
 \name{sim_calc}
 \alias{sim_calc}
-\title{Sample size and decision regarding test statistics}
+\title{Conducted a study with a internal pilot study and normally distributed data}
 \usage{
 sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
          adj = F, regel = F, nbound = 500)
@@ -17,17 +17,17 @@ sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
 \item{delta}{Number. Expectation difference of two samples.\cr
 If you select a Test for superiority/ difference then select 'delta = 0'.\cr
 Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically\cr
-be applied.\cr
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will \cr
+automatically be applied.\cr
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number. Relevant difference of expected values in the alternative hypothesis.}
 
-\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)\cr
-or two-sided (Test for difference).\cr
+\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ \cr
+Non-Inferiority test) or two-sided (Test for difference).\cr
 One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
-Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: |mu_x -  mu_y| != 0\cr
 Attention: Choice of delta. (see delta)\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
@@ -47,10 +47,13 @@ be calculated automatically.\cr
 If no nbound are defined then a standard deviation range must be chosen (see sd_ber).}
 }
 \value{
-This function returns a value if the simulation study rejects (1) or can not reject (0) the null hypothesis.
+This function returns a value if the simulation study rejects (1) or can not reject (0) the \cr
+null hypothesis.
 }
 \description{
 This is an auxiliary function of 'sim_sample_pow'.
+It is conducting a study with a internal pilot study and normally distributed data. The calculated
+value of the test statistic is compared directly with the corresponding quantile of the t-distribution.
 }
 \seealso{
 \code{\link{test_h0}}

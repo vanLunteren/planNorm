@@ -2,7 +2,7 @@
 % Please edit documentation in R/pow.R
 \name{pow}
 \alias{pow}
-\title{Simulation of the power}
+\title{Simulation of the type I error rate and the power}
 \usage{
 pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05),
     adj = F, regel = F, nbound = 500, simu = 10000)
@@ -11,8 +11,8 @@ pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1,
 \item{delta}{Number. Expectation difference of two samples.\cr
 If you select a Test for superiority/ difference then select 'delta = 0'.\cr
 Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically \cr
-be applied.\cr
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will \cr
+automatically be applied.\cr
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number/ Vector of numbers. Relevant difference of expected values in the alternative hypothesis.}
@@ -20,11 +20,11 @@ If not specified, delta is set to 0.}
 \item{sd}{Number. Assumed standard deviation of the data. \cr
 Used to calculate the originally planned number of cases.}
 
-\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)\cr
-or two-sided (Test for difference).\cr
+\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ \cr
+Non-Inferiority test) or two-sided (Test for difference).\cr
 One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
-Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: |mu_x -  mu_y| != 0\cr
 Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
@@ -51,18 +51,18 @@ If not specified, simu is set to 10000.}
 }
 \value{
 This function only creates the power values for multiple timings of the internal pilot studies.\cr
-The output is used in the function \code{pow_prop} to visualize the power depending on the timing \cr
-for different true expected value differences.
+The output is used in the function \code{pow_prop} to visualize the power depending on the \cr
+timing for different true expected value differences.
 }
 \description{
 This is an auxiliary function.
-It calculates the power of the design with an internal pilot study for different timings of the
-pilot study and for multiple actual differences in expected differences.
+It calculates the type I error rate and the power of the design with an internal pilot study for
+different timings of the pilot study and for multiple actual differences in expected differences.
 The originally planned sample size is calculated on the basis of an assumed standard deviation.
 A distinction is made between one-sided and two-sided tests.
 }
 \seealso{
-\code{\link{sim_p_calc}}
+\code{\link{sim_calc}}
 }
 \author{
 Csilla van Lunteren

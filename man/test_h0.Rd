@@ -2,35 +2,37 @@
 % Please edit documentation in R/test_h0.R
 \name{test_h0}
 \alias{test_h0}
-\title{Test a test statistic to see if the null hypothesis can be rejected}
+\title{Comparison of a test statistic with the associated significance level}
 \usage{
 test_h0(test = 1, T, n1, n2, alpha = 0.05, delta = 0)
 }
 \arguments{
-\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)\cr
-or two-sided (Test for difference).\cr
+\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority \cr
+test) or two-sided (Test for difference).\cr
 One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
-Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: |mu_x -  mu_y| != 0\cr
 Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
 \item{T}{Number. Value of the calculated test statistic.}
 
-\item{n1}{Number. sample size of the first sample. Must only be specified if the test statistic is to be compared with
-the quantiles of the t-distribution.
-If not specified, \code{n1 = NA} is chosen, this means a comparison with the quantiles of the normal distribution.}
+\item{n1}{Number. sample size of the first sample. Must only be specified if the test statistic is to be compared
+with the quantiles of the t-distribution.
+If not specified, \code{n1 = NA} is chosen. This means a comparison with the quantiles of the normal
+distribution.}
 
-\item{n2}{Number. sample size of the second sample. Must only be specified if the test statistic is to be compared with
-the quantiles of the t-distribution.
-If not specified, \code{n2 = NA} is chosen, this means a comparison with the quantiles of the normal distribution.}
+\item{n2}{Number. sample size of the second sample. Must only be specified if the test statistic is to be compared
+with the quantiles of the t-distribution.
+If not specified, \code{n2 = NA} is chosen, this means a comparison with the quantiles of the normal
+distribution.}
 
 \item{alpha}{Number. Desired alpha-level of the test.\cr
 If not specified, alpha is set to 0.05.}
 
 \item{delta}{Number. Expectation difference of two samples.\cr
-If you select a Test for superiority/ difference then select 'delta = 0'.\cr
-Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
+If you select a test for superiority/ difference then select 'delta = 0'.\cr
+Only if you select a test for non-inferiority you can select 'delta != 0'.\cr
 Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically \cr
 be applied.\cr
 If not specified, delta is set to 0.}
@@ -43,9 +45,10 @@ The value 0 or 1 will be returned. \cr
 \description{
 This is an important secondary function.
 It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic.
-Three cases of hypotheses can be considered: test for superiority, test for non-inferiority, test for difference.
-The test statistic can be compared with the quantiles of the normal distribution and the quantiles of the
-t-distribution.
+Three cases of hypotheses can be considered: test for superiority, test for non-inferiority,
+test for difference.
+The test statistic can be compared with the quantiles of the normal distribution and the quantiles
+of the t-distribution.
 }
 \details{
 The aim of this function is to simplify the application of test decisions in hypothesis tests.

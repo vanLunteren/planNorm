@@ -2,7 +2,7 @@
 % Please edit documentation in R/pow_prop.R
 \name{pow_prop}
 \alias{pow_prop}
-\title{Creates a plot for the power based on the timing of the internal pilot study}
+\title{Creates a plot or a table for the type I error rate and power versus timing of the internalpilot study}
 \usage{
 pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
          adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")
@@ -11,8 +11,8 @@ pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1,
 \item{delta}{Number. Expectation difference of two samples.\cr
 If you select a Test for superiority/ difference then select 'delta = 0'.\cr
 Only if you select a Test for non-inferiority you can select 'delta != 0'.\cr
-Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will automatically\cr
-be applied.\cr
+Attention: If you chose 'test = 1' and 'delta != 0', the test for non-inferiority will \cr
+automatically be applied.\cr
 If not specified, delta is set to 0.}
 
 \item{Delta}{Number/ vector of numbers. Relevant difference of expected values in the alternative hypothesis.\cr
@@ -21,11 +21,11 @@ A maximum of five different values are possible if you choose \code{create = "ta
 \item{sd}{Number. Assumed standard deviation of the data.\cr
 Used to calculate the originally planned number of cases.}
 
-\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ Non-Inferiority test)\cr
-or two-sided (Test for difference).\cr
+\item{test}{Number. What type of hypothesis test should be performed. One-sided (Superiority/ \cr
+Non-Inferiority test) or two-sided (Test for difference).\cr
 One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y > 0\cr
                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
-Tweo-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: |mu_x -  mu_y| != 0\cr
 Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.\cr}
 
@@ -35,8 +35,8 @@ If not specified, alpha is set to 0.05.}
 \item{beta}{Number. Acceptable beta error of the test.\cr
 If not specified, beta is set to 0.2.}
 
-\item{prop}{Two numbers/ Vector of numbers. Timing of the internal pilot study depending on the originally planned\cr
-sample size.\cr
+\item{prop}{Two numbers/ Vector of numbers. Timing of the internal pilot study depending on the originally\cr
+planned sample size.\cr
 Two numbers must be passed, the smallest and largest timing of the internal pilot study.\cr
 The plot is displayed for the interval of these values.\cr
 If two values are transferred, a sequence is automatically defined.\cr
@@ -61,8 +61,7 @@ If not specified, simu is set to 10000.}
 It returns a plot.
 }
 \description{
-That is one of the main functions.
-It draws a plot of power based on the timing of the internal pilot study.
+It creates a plot or a table for the sample size, type I error rate, and power versus standard deviation.
 If desired, it may represent several actual expected value differences for comparison.
 }
 \seealso{

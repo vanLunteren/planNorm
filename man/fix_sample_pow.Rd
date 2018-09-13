@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_sample_pow.R
 \name{fix_sample_pow}
 \alias{fix_sample_pow}
-\title{Simulation of the sample size and the power}
+\title{Simulation of the sample size , the type I error rate and the power}
 \usage{
 fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
                simu = 10000)
@@ -22,11 +22,11 @@ If not specified, delta is set to 0.\cr}
 \item{sd}{Number. Assumed standard deviation of the data. \cr
 Used to calculate the originally planned sample size.}
 
-\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ Non-Inferiority test)\cr
-or two-sided (Test for difference).\cr
+\item{test}{Number. What type of hypothesis test should be performed, one-sided (Superiority/ \cr
+Non-Inferiority test) or two-sided (Test for difference).\cr
 One-sided (test = 1): Superiortity H0: mu_x - mu_y <= 0 vs. H1: mu_x - mu_y >0\cr
                       Non-Inferiority H0: mu_x - mu_y >= delta vs. H1: mu_x - mu_y < delta\cr
-Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: mu_x -  mu_y != 0\cr
+Two-sided (test = 2): Difference H0: |mu_x - mu_y| = 0 vs. H1: |mu_x -  mu_y| != 0\cr
 Attention: Choice of delta. (see \code{delta})\cr
 If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used.}
 
@@ -40,14 +40,18 @@ If not specified, beta is set to 0.2.}
 If not specified, simu is set to 10000.}
 }
 \value{
-This function only creates the sample size and Power values for multiple actual standard deviation values.\cr
-The output is used in the function sample_pow to visualize the sample size and the power.
+This function only creates the sample size, type I error rate and Power values for multiple actual
+standard deviation values.\cr
+The output is used in the function sample_pow to visualize the sample size, the type I error rate and
+the power.
 }
 \description{
 This is an auxiliary function.
-It calculates the sample size and the simulated power of a fixed-sample design.
+It calculates the sample size , simulated type I error rate and the simulated power of a fixed-sample
+design.
 The originally planned sample size is calculated on the basis of an assumed standard deviation.
-A distinction is made between one-sided and two-sided tests.
+A distinction is made between one-sided and two-sided tests. The test statistic is compared to the
+quantiles of the normal distribution.
 }
 \author{
 Csilla van Lunteren
