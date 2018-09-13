@@ -299,25 +299,27 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
     alpplot <- ggplot2::ggplot()
 
     if ("fix" %in% fix_sim){
+      falp = N_pow_f[2, ]
+      fpow = N_pow_f[3, ]
       if (delta != 0){
-        alp_fix <- data.frame(sd = delta / sd_ber, falp = N_pow_f[2, ])
-        pow_fix <- data.frame(sd = delta / sd_ber, fpow = N_pow_f[3, ])
+        alp_fix <- data.frame(sd = delta / sd_ber, falp = falp)
+        pow_fix <- data.frame(sd = delta / sd_ber, fpow = fpow)
       } else {
-        alp_fix <- data.frame(sd = sd_ber, falp = N_pow_f[2, ])
-        pow_fix <- data.frame(sd = sd_ber, fpow = N_pow_f[3, ])
+        alp_fix <- data.frame(sd = sd_ber, falp = falp)
+        pow_fix <- data.frame(sd = sd_ber, fpow = fpow)
       }
 
 
       if (!("sim" %in% fix_sim)){
         alpplot <- alpplot +
-          ggplot2::geom_line(data = alp_fix, ggplot2::aes(x = sd, y = ~falp), col = "black")
+          ggplot2::geom_line(data = alp_fix, ggplot2::aes(x = sd, y = falp), col = "black")
         powplot <- powplot +
-          ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = ~fpow), col = "black")
+          ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = fpow), col = "black")
       } else {
         alpplot <- alpplot +
-          ggplot2::geom_line(data = alp_fix, ggplot2::aes(x = sd, y = ~falp), col = "darkgrey")
+          ggplot2::geom_line(data = alp_fix, ggplot2::aes(x = sd, y = falp), col = "darkgrey")
         powplot <- powplot +
-          ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = ~fpow), col = "darkgrey")
+          ggplot2::geom_line(data = pow_fix, ggplot2::aes(x = sd, y = fpow), col = "darkgrey")
       }
     }
 
