@@ -7,7 +7,7 @@
 #' design.
 #' The originally planned sample size is calculated on the basis of an assumed standard deviation.
 #' A distinction is made between one-sided and two-sided tests. The test statistic is compared to the
-#' quantiles of the normal distribution.
+#' quantiles of the t-distribution.
 #'
 #' @usage
 #' fix_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
@@ -186,6 +186,6 @@ fix_calc <- function(N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta 
 
   T_h1 <- sqrt((length(X_h1) * length(Y_h1)) / (length(X_h1) + length(Y_h1))) *
             (mean(X_h1) - mean(Y_h1) - delta) / Sig_gepoolt_h1
-  return (c(test_h0(test = test, T = T_h0, alpha = alpha, delta = delta),
-            test_h0(test = test, T = T_h1, alpha = alpha, delta = delta)))
+  return (c(test_h0(test = test, T = T_h0, n1 = N0 / 2, n2 = N0 / 2, alpha = alpha, delta = delta),
+            test_h0(test = test, T = T_h1, n1 = N0 / 2, n2 = N0 / 2, alpha = alpha, delta = delta)))
 }
