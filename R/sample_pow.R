@@ -428,8 +428,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
                        panel.background = ggplot2::element_blank())
     } else {
       alpplot <- alpplot +
-        ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-        ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
+        ggplot2::geom_hline(yintercept = alpha, linetype = 2, col = "gray") +
         ggplot2::scale_y_continuous(
           name = "Type I error rate",
           breaks = seq(round(0.4 * alpha, 2), round(1.6 * alpha, 2), 0.01)) +
