@@ -191,7 +191,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
       ggplot2::theme(legend.key = ggplot2::element_rect(fill = "white"))
 
     alpplot <- alpplot +
-      ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
+      ggplot2::geom_hline(yintercept = alpha, linetype = 2, col = "gray") +
       ggplot2::scale_y_continuous(name = "Type I error rate") +
       ggplot2::scale_x_continuous(name = "Timing (n1/N)") +
       ggplot2::ggtitle("Type I error rate") +

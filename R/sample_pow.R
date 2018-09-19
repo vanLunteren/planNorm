@@ -415,7 +415,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
 
       powplot <- powplot +
         ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-        ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
+        #ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
         ggplot2::scale_y_continuous(name = "Power", breaks = seq(0, 1, 0.2)) +
         ggplot2::scale_x_continuous(
           name = "delta / Standard Deviation",
@@ -444,7 +444,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
 
       powplot <- powplot +
         ggplot2::geom_hline(yintercept = 0.8, linetype = 2, col = "gray") +
-        ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
+        #ggplot2::geom_hline(yintercept = 0.2, linetype = 2, col = "gray") +
         ggplot2::scale_y_continuous(name = "Power", breaks = seq(0, 1, 0.2)) +
         ggplot2::scale_x_continuous(name = "Standard Deviation",
                                     breaks = seq(round(min(sd_ber)), round(max(sd_ber)),
