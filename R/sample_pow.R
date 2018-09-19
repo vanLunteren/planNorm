@@ -151,7 +151,12 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
   }
 
   if (is.numeric(sd_ber) & length(sd_ber) == 2){
-    sd_ber <- seq(min(sd_ber), max(sd_ber), (max(sd_ber) - min(sd_ber)) / 19)
+    if (delta != 0){
+      sd_ber <- sort(delta / seq(delta / max(sd_ber), delta / min(sd_ber),
+                                 (delta / min(sd_ber) - delta / max(sd_ber)) / 19), decreasing = T)
+    } else {
+      sd_ber <- round(seq(sd_min, sd_max, (max(sd_ber) - min(sd_ber)) / 19), 2)
+    }
   }  else if (is.numeric(sd_ber) & length(sd_ber) >= 2){
     sd_ber <- sort(sd_ber)
   }  else {
