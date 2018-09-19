@@ -158,7 +158,11 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
       sd_ber <- round(seq(sd_min, sd_max, (max(sd_ber) - min(sd_ber)) / 19), 2)
     }
   }  else if (is.numeric(sd_ber) & length(sd_ber) >= 2){
-    sd_ber <- sort(sd_ber)
+    if (delta != 0){
+      sd_ber <- sort(sd_ber, decreasing = T)
+    } else {
+      sd_ber <- sort(sd_ber)
+    }
   }  else {
     sd_min <- (1 / 2 * sqrt(N0 * min(prop)) * 1 / (stats::qnorm(1-alpha) + stats::qnorm(0.8)) *
                  (abs(Delta - delta)))
