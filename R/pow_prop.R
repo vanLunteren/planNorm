@@ -7,7 +7,7 @@
 #'
 #' @usage
 #' pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-#'          adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")
+#'          adj = F, rule = F, nbound = 500, simu = 10000, create = "plot")
 #'
 #' @param delta
 #' Number. Expectation difference of two samples.\cr
@@ -53,7 +53,7 @@
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #'
-#' @param regel
+#' @param rule
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
@@ -110,7 +110,7 @@
 #' @export
 #'
 pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-                     adj = F, regel = F, nbound = 500, simu = 10000, create = "plot"){
+                     adj = F, rule = F, nbound = 500, simu = 10000, create = "plot"){
 
   if (length(Delta) > 5 & create == "tab"){
     stop("Maximum five values for Delta are allowed!")
@@ -131,7 +131,7 @@ pow_prop <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, 
 
   Delta <- sort(Delta)
   pow_prop_ <- pow(delta = delta, Delta = Delta, sd = sd, test = test, alpha = alpha, beta = beta,
-                      prop = prop_area, adj = adj, regel = regel, nbound = nbound, simu = simu)
+                      prop = prop_area, adj = adj, rule = rule, nbound = nbound, simu = simu)
 
   if (test == 1){
     test_n <-"one-sided"

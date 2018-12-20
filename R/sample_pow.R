@@ -10,7 +10,7 @@
 #'
 #' @usage
 #' sample_pow(sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
-#'            prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
+#'            prop = c(0.5, 0.7), adj = F,  rule = F, nbound = 500,
 #'            fix_sim = c("fix", "sim"), simu = 10000, create = "plot")
 #'
 #' @param sd_ber
@@ -60,7 +60,7 @@
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #'
-#' @param regel
+#' @param rule
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
@@ -130,7 +130,7 @@
 #' @export
 #'
 sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
-                        prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
+                        prop = c(0.5, 0.7), adj = F,  rule = F, nbound = 500,
                         fix_sim = c("fix", "sim"), simu = 10000, create = "plot"){
 
   if (length(prop) > 5 & create == "tab"){
@@ -183,7 +183,7 @@ sample_pow <- function (sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05
 
   if ("sim" %in% fix_sim){
     N_pow_s <- sim_sample_pow(sd_ber = sd_ber, delta = delta, Delta = Delta, sd = sd, test = test,
-                              alpha = alpha, beta = beta, prop = prop, adj = adj, regel = regel,
+                              alpha = alpha, beta = beta, prop = prop, adj = adj, rule = rule,
                               nbound = nbound, simu = simu)
   }
 

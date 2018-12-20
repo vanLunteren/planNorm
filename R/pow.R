@@ -10,7 +10,7 @@
 #'
 #' @usage
 #' pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05),
-#'     adj = F, regel = F, nbound = 500, simu = 10000)
+#'     adj = F, rule = F, nbound = 500, simu = 10000)
 #'
 #' @param delta
 #' Number. Expectation difference of two samples.\cr
@@ -51,7 +51,7 @@
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #'
-#' @param regel
+#' @param rule
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
@@ -80,7 +80,7 @@
 #' @export
 #'
 pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05),
-                 adj = F, regel = F, nbound = 500, simu = 10000){
+                 adj = F, rule = F, nbound = 500, simu = 10000){
 
   if (delta != 0 & test == 2){
     stop("When choosing a two-sided hypothesis test (test for differences), delta = 0 must be
@@ -103,7 +103,7 @@ pow <- function (delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop 
 
       calc <- replicate(simu,
                         sim_calc(n1 = n1, delta = delta, Delta = Delta, sd_ber = sd, test = test,
-                                 alpha = alpha, beta = beta, N0 = N0, adj = adj, regel = regel,
+                                 alpha = alpha, beta = beta, N0 = N0, adj = adj, rule = rule,
                                  nbound = nbound))
 
       return (c(mean(calc[2, ]), mean(calc[3, ])))

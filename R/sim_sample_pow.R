@@ -10,7 +10,7 @@
 #'
 #' @usage
 #' sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
-#'                prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000)
+#'                prop = c(0.5, 0.7), adj = F, rule = F, nbound = 500, simu = 10000)
 #' @param sd_ber
 #' Sequence of numbers. Interval of the actual standard deviation in the data. \cr
 #' With regard to this interval, the sample size and the power are computed.
@@ -55,7 +55,7 @@
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #'
-#' @param regel
+#' @param rule
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
@@ -84,7 +84,7 @@
 #' @export
 #'
 sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
-                             prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000){
+                             prop = c(0.5, 0.7), adj = F, rule = F, nbound = 500, simu = 10000){
 
   if (delta != 0 & test == 2){
     stop("When choosing a two-sided hypothesis test (test for differences), delta = 0 must be
@@ -107,7 +107,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.0
 
       calc <- replicate(simu,
                         sim_calc(n1 = n1, N0 = N0, sd_ber = sd_ber, delta = delta, Delta = Delta,
-                                 test = test, alpha = alpha, beta = beta, adj = adj, regel = regel,
+                                 test = test, alpha = alpha, beta = beta, adj = adj, rule = rule,
                                  nbound = nbound))
 
       return (c(stats::quantile(calc[1, ],c(0, 0.25, 0.5, 0.75, 1)), mean(calc[2, ]),
@@ -126,7 +126,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.0
 #'
 #' @usage
 #' sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
-#'          adj = F, regel = F, nbound = 500)
+#'          adj = F, rule = F, nbound = 500)
 #'
 #' @param n1
 #' Number. Size of the internal pilot study.
@@ -168,7 +168,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.0
 #' @param adj
 #' Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?
 #'
-#' @param regel
+#' @param rule
 #' Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?
 #'
 #' @param nbound
@@ -194,7 +194,7 @@ sim_sample_pow <- function (sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.0
 
 
 sim_calc <- function (n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
-                      adj = F, regel = F, nbound = 500){
+                      adj = F, rule = F, nbound = 500){
 
   X1_h0 <- stats::rnorm(n = ceiling(n1 / 2), mean = delta, sd = sd_ber)
   Y1_h0 <- stats::rnorm(n = ceiling(n1 / 2), mean = 0, sd = sd_ber)
@@ -222,7 +222,7 @@ sim_calc <- function (n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, 
                       Delta^2)
   }
 
-  if (regel == "WB"){
+  if (rule == "WB"){
     N_h0 <- max(N0, N_h0)
     N_h1 <- max(N0, N_h1)
   }
