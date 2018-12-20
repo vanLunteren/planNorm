@@ -17,15 +17,9 @@ If not specified, the one-Sided Test (Superiority/ Non-Inferiority Test) is used
 
 \item{T}{Number. Value of the calculated test statistic.}
 
-\item{n1}{Number. sample size of the first sample. Must only be specified if the test statistic is to be compared
-with the quantiles of the t-distribution.
-If not specified, \code{n1 = NA} is chosen. This means a comparison with the quantiles of the normal
-distribution.}
+\item{n1}{Number. sample size of the first sample.}
 
-\item{n2}{Number. sample size of the second sample. Must only be specified if the test statistic is to be compared
-with the quantiles of the t-distribution.
-If not specified, \code{n2 = NA} is chosen, this means a comparison with the quantiles of the normal
-distribution.}
+\item{n2}{Number. sample size of the second sample.}
 
 \item{alpha}{Number. Desired alpha-level of the test.\cr
 If not specified, alpha is set to 0.05.}
@@ -47,8 +41,7 @@ This is an important secondary function.
 It checks whether the corresponding null hypothesis can be rejected by a calculated test statistic.
 Three cases of hypotheses can be considered: test for superiority, test for non-inferiority,
 test for difference.
-The test statistic can be compared with the quantiles of the normal distribution and the quantiles
-of the t-distribution.
+The test statistic is compared with the corresponding quantiles of the t-distribution.
 }
 \details{
 The aim of this function is to simplify the application of test decisions in hypothesis tests.

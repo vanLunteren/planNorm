@@ -5,7 +5,7 @@
 \title{Simulation of the sample size , the type I error rate and the power}
 \usage{
 sim_sample_pow(sd_ber, delta = 0, Delta, sd, test = 1,  alpha = 0.05, beta = 0.2,
-               prop = c(0.5, 0.7), adj = F, regel = F, nbound = 500, simu = 10000)
+               prop = c(0.5, 0.7), adj = F, rule = F, nbound = 500, simu = 10000)
 }
 \arguments{
 \item{sd_ber}{Sequence of numbers. Interval of the actual standard deviation in the data. \cr
@@ -43,7 +43,7 @@ If a vector is passed, all timings within a plot are displayed.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
-\item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
+\item{rule}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.\cr
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots \cr

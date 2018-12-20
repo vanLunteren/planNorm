@@ -5,7 +5,7 @@
 \title{Creates a plot or a table for the type I error rate and power versus timing of the internalpilot study}
 \usage{
 pow_prop(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = c(0.1, 1),
-         adj = F, regel = F, nbound = 500, simu = 10000, create = "plot")
+         adj = F, rule = F, nbound = 500, simu = 10000, create = "plot")
 }
 \arguments{
 \item{delta}{Number. Expectation difference of two samples.\cr
@@ -44,7 +44,7 @@ If several values are transferred, these are interreted as a sequence.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
-\item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
+\item{rule}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.\cr
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots\cr

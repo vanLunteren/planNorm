@@ -5,7 +5,7 @@
 \title{Simulation of the type I error rate and the power}
 \usage{
 pow(delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2, prop = seq(0.1, 1, 0.05),
-    adj = F, regel = F, nbound = 500, simu = 10000)
+    adj = F, rule = F, nbound = 500, simu = 10000)
 }
 \arguments{
 \item{delta}{Number. Expectation difference of two samples.\cr
@@ -39,7 +39,7 @@ Timing of the internal pilot study depending on the originally planned sample si
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
-\item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
+\item{rule}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.\cr
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots \cr

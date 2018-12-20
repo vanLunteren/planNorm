@@ -5,7 +5,7 @@
 \title{Creates a plot or a table for the sample size, type I error rate and power versus standard deviation}
 \usage{
 sample_pow(sd_ber = T, delta = 0, Delta, sd, test = 1, alpha = 0.05, beta = 0.2,
-           prop = c(0.5, 0.7), adj = F,  regel = F, nbound = 500,
+           prop = c(0.5, 0.7), adj = F,  rule = F, nbound = 500,
            fix_sim = c("fix", "sim"), simu = 10000, create = "plot")
 }
 \arguments{
@@ -47,7 +47,7 @@ A maximum of five different values are possible if you choose \code{create = "ta
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
-\item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
+\item{rule}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.\cr
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots\cr

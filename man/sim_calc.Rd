@@ -5,7 +5,7 @@
 \title{Conducted a study with a internal pilot study and normally distributed data}
 \usage{
 sim_calc(n1, N0, sd_ber, delta = 0, Delta, test = 1, alpha = 0.05, beta = 0.2,
-         adj = F, regel = F, nbound = 500)
+         adj = F, rule = F, nbound = 500)
 }
 \arguments{
 \item{n1}{Number. Size of the internal pilot study.}
@@ -39,7 +39,7 @@ If not specified, beta is set to 0.2.}
 
 \item{adj}{Logical. Should the one-sample variance, calculated in the internal pilot study, be adjusted?}
 
-\item{regel}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
+\item{rule}{Logical. Should the sample size adjustment rule be applied by Wittes and Brittain?}
 
 \item{nbound}{Number. Upper limit of the sample size.\cr
 Attention: Only if you choose nbound can a suitable standard deviation range for the plots\cr

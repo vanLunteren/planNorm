@@ -51,7 +51,7 @@ It calculates the sample size , simulated type I error rate and the simulated po
 design.
 The originally planned sample size is calculated on the basis of an assumed standard deviation.
 A distinction is made between one-sided and two-sided tests. The test statistic is compared to the
-quantiles of the normal distribution.
+quantiles of the t-distribution.
 }
 \author{
 Csilla van Lunteren
